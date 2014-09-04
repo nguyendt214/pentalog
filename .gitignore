@@ -1,3 +1,5 @@
+/*
+
 .modgit/
 app/code/community/Find/
 app/code/community/Phoenix/
@@ -119,3 +121,4 @@ skin/frontend/default/modern/
 skin/frontend/enterprise
 skin/install/
 var/
+*/
