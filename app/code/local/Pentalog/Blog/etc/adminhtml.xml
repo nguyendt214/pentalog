@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <xpentalog module="blog">
+            <title>xPentalog</title>
+            <sort_order>10</sort_order>               
+            <children>
+                <blog module="blog">
+                    <title>Blog</title>
+                    <sort_order>1</sort_order>   
+                    <children>
+                        <blog>
+                            <title>Manage Blog</title>
+                            <sort_order>0</sort_order>
+                            <action>blog/adminhtml_blog</action>
+                        </blog>
+                        <category>
+                            <title>Manage Category</title>
+                            <sort_order>1</sort_order>
+                            <action>blog/adminhtml_category</action>
+                        </category>
+                        <comment>
+                            <title>Manage Comment</title>
+                            <sort_order>2</sort_order>
+                            <action>blog/adminhtml_comment</action>
+                        </comment>
+                        <type>
+                            <title>Manage Type</title>
+                            <sort_order>3</sort_order>
+                            <action>blog/adminhtml_type</action>
+                        </type>
+                    </children>
+                </blog>
+            </children>
+        </xpentalog>
+    </menu>
+    <layout>
+        <updates>
+            <blog>
+                <file>blog.xml</file>
+            </blog>
+        </updates>
+    </layout>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <blog_section translate="title" module="blog">
+                                        <title>Pentalog Blog Extension</title>
+                                        <sort_order>10</sort_order>
+                                    </blog_section>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <xpentalog translate="title" module="blog">
+                        <title>xPentalog</title>
+                        <sort_order>1000</sort_order>
+                        <children>
+                            <blog translate="title">
+                                <title>Blog Module</title>
+                                <children>
+                                    <blog>
+                                        <title>Manage Blog</title>
+                                        <sort_order>0</sort_order>
+                                    </blog>
+                                    <category>
+                                        <title>Manage Category</title>
+                                        <sort_order>1</sort_order>
+                                    </category>
+                                    <comment>
+                                        <title>Manage Comment</title>
+                                        <sort_order>2</sort_order>
+                                    </comment>
+                                    <type>
+                                        <title>Manage Type</title>
+                                        <sort_order>3</sort_order>
+                                    </type>
+                                </children>
+                            </blog>
+                        </children>
+                    </xpentalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
