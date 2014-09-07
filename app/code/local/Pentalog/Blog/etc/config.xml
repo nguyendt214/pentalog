@@ -43,33 +43,33 @@
             <blog_mysql4>
                 <class>Pentalog_Blog_Model_Mysql4</class>
                 <entities>
-                    <p5_blog>
+                    <blog>
                         <table>p5_blog</table>
-                    </p5_blog>
-                    <p5_category>
+                    </blog>
+                    <category>
                         <table>p5_category</table>
-                    </p5_category>
-                    <p5_blog_category>
+                    </category>
+                    <blogcategory>
                         <table>p5_blog_category</table>
-                    </p5_blog_category>
-                    <p5_blog_store>
+                    </blogcategory>
+                    <blogstore>
                         <table>p5_blog_store</table>
-                    </p5_blog_store>
-                    <p5_category_store>
+                    </blogstore>
+                    <categorystore>
                         <table>p5_category_store</table>
-                    </p5_category_store>
-                    <p5_comment>
+                    </categorystore>
+                    <comment>
                         <table>p5_comment</table>
-                    </p5_comment>
-                    <p5_blog_comment>
+                    </comment>
+                    <blogcomment>
                         <table>p5_blog_comment</table>
-                    </p5_blog_comment>
-                    <p5_type>
+                    </blogcomment>
+                    <type>
                         <table>p5_type</table>
-                    </p5_type>
-                    <p5_category_type>
+                    </type>
+                    <categorytype>
                         <table>p5_category_type</table>
-                    </p5_category_type>
+                    </categorytype>
                 </entities>
             </blog_mysql4>
         </models>

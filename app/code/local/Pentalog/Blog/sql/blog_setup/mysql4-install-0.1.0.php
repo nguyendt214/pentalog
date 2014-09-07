@@ -8,8 +8,8 @@ $installer = $this;
 $installer->startSetup();
 //Blog table
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('p5_blog')};
-CREATE TABLE {$this->getTable('p5_blog')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blog')};
+CREATE TABLE {$this->getTable('blog')} (
   `blog_id` int(11) unsigned NOT NULL auto_increment,
   `url` varchar(255) NOT NULL default '',
   `name` varchar(255) NOT NULL default '',
@@ -27,8 +27,8 @@ CREATE TABLE {$this->getTable('p5_blog')} (
 //category table
 
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('p5_category')};
-CREATE TABLE {$this->getTable('p5_category')} (
+-- DROP TABLE IF EXISTS {$this->getTable('category')};
+CREATE TABLE {$this->getTable('category')} (
   `category_id` int(11) unsigned NOT NULL auto_increment,
   `url` varchar(255) NOT NULL default '',
   `name` varchar(255) NOT NULL default '',
@@ -44,8 +44,8 @@ CREATE TABLE {$this->getTable('p5_category')} (
     ");
 //Reference between Blog and Categoy
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('p5_blog_category')};
-CREATE TABLE {$this->getTable('p5_blog_category')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blogcategory')};
+CREATE TABLE {$this->getTable('blogcategory')} (
   `blog_category_id` int(11) unsigned NOT NULL auto_increment,
   `category_id` int(11) NOT NULL,
   `blog_id` int(11) NOT NULL,
@@ -54,8 +54,8 @@ CREATE TABLE {$this->getTable('p5_blog_category')} (
     ");
 //Reference between Blog and Store View
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('p5_blog_store')};
-CREATE TABLE {$this->getTable('p5_blog_store')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blogstore')};
+CREATE TABLE {$this->getTable('blogstore')} (
   `blog_store_id` int(11) unsigned NOT NULL auto_increment,
   `store_id` int(11) NOT NULL,
   `blog_id` int(11) NOT NULL,
@@ -65,8 +65,8 @@ CREATE TABLE {$this->getTable('p5_blog_store')} (
 
 //Reference between Category and Store View
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('p5_category_store')};
-CREATE TABLE {$this->getTable('p5_category_store')} (
+-- DROP TABLE IF EXISTS {$this->getTable('categorystore')};
+CREATE TABLE {$this->getTable('categorystore')} (
   `category_store_id` int(11) unsigned NOT NULL auto_increment,
   `store_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -75,8 +75,8 @@ CREATE TABLE {$this->getTable('p5_category_store')} (
     ");
 //Comments table
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('p5_comment')};
-CREATE TABLE {$this->getTable('p5_comment')} (
+-- DROP TABLE IF EXISTS {$this->getTable('comment')};
+CREATE TABLE {$this->getTable('comment')} (
   `comment_id` int(11) unsigned NOT NULL auto_increment,
   `title` varchar(255) NOT NULL,
   `user_name` varchar(255),
@@ -92,8 +92,8 @@ CREATE TABLE {$this->getTable('p5_comment')} (
     ");
 //Reference between Blog and Comment
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('p5_blog_comment')};
-CREATE TABLE {$this->getTable('p5_blog_comment')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blogcomment')};
+CREATE TABLE {$this->getTable('blogcomment')} (
   `blog_comment_id` int(11) unsigned NOT NULL auto_increment,
   `blog_id` int(11) NOT NULL,
   `comment_id` int(11) NOT NULL,
@@ -102,8 +102,8 @@ CREATE TABLE {$this->getTable('p5_blog_comment')} (
     ");
 //Type table
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('p5_type')};
-CREATE TABLE {$this->getTable('p5_type')} (
+-- DROP TABLE IF EXISTS {$this->getTable('type')};
+CREATE TABLE {$this->getTable('type')} (
   `type_id` int(11) unsigned NOT NULL auto_increment,
   `title` varchar(255) NOT NULL,
   `style_name` varchar(255),
@@ -113,8 +113,8 @@ CREATE TABLE {$this->getTable('p5_type')} (
     ");
 //Type and Category relationship
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('p5_category_type')};
-CREATE TABLE {$this->getTable('p5_category_type')} (
+-- DROP TABLE IF EXISTS {$this->getTable('categorytype')};
+CREATE TABLE {$this->getTable('categorytype')} (
   `category_type_id` int(11) unsigned NOT NULL auto_increment,
   `category_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
