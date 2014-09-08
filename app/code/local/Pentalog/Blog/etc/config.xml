@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Pentalog_Blog>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
         </Pentalog_Blog>
     </modules>
     <frontend>
@@ -22,7 +22,25 @@
                 </blog>
             </updates>
         </layout>
+        <translate>
+            <modules>
+                <blog>
+                    <files>
+                        <default>Xpentalog_Blog.csv</default>
+                    </files>
+                </blog>
+            </modules>
+        </translate>
     </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <blog>
+                    <file>blog.xml</file>
+                </blog>
+            </updates>
+        </layout>
+    </adminhtml>
     <admin>
         <routers>
             <blog>

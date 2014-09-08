@@ -1,19 +1,23 @@
 <?php
 
-class Pentalog_Blog_Block_Adminhtml_Blog_Edit_Tab_Form extends Mage_Adminhtml_Block_Widget_Form {
+/*
+  @author: Kevin (ndotrong@pentalog.fr)
+ */
+
+class Pentalog_Blog_Block_Adminhtml_Category_Edit_Tab_Form extends Mage_Adminhtml_Block_Widget_Form {
 
     protected function _prepareForm() {
         $form = new Varien_Data_Form();
         $this->setForm($form);
-        $fieldset = $form->addFieldset('blog_form', array('legend' => Mage::helper('blog')->__('Article information')));
-        //Title
-        $fieldset->addField('title', 'text', array(
-            'label' => Mage::helper('blog')->__('Title'),
+        $fieldset = $form->addFieldset('category_form', array('legend' => Mage::helper('blog')->__('Category information')));
+        //Name
+        $fieldset->addField('name', 'text', array(
+            'label' => Mage::helper('blog')->__('Name'),
             'class' => 'required-entry',
             'required' => true,
-            'name' => 'title',
+            'name' => 'name',
         ));
-        //Identifier
+//        //Identifier
         $identifierUniqueText = Mage::helper('blog')->__("This value need unique");
         $identifierErrorMess = addslashes(Mage::helper('blog')->__("Please use only character: a-z, A-Z, 0-9, '-', '_' on this field."));
         $fieldset->addField(
@@ -46,6 +50,23 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Edit_Tab_Form extends Mage_Adminhtml_Bl
             'after_element_html' => '<span class="hint">' . $urlUniqueText . '</span>',
                 )
         );
+
+        //Type
+        $types = Mage::helper('blog')->getTypes();
+        $typeList = array();
+        if (count($types)) {
+            foreach ($types as $type) {
+                $typeList[] = array(
+                    'label' => $type->getTitle(),
+                    'value' => $type->getId()
+                );
+            }
+            $fieldset->addField('type', 'select', array(
+                'label' => Mage::helper('blog')->__('Display Type'),
+                'name' => 'type',
+                'values' => $typeList,
+            ));
+        }
         //Store view
         if (!Mage::app()->isSingleStoreMode()) {
             $fieldset->addField(
@@ -58,7 +79,6 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Edit_Tab_Form extends Mage_Adminhtml_Bl
                     )
             );
         }
-
         //Image
         $fieldset->addField('image', 'image', array(
             'label' => Mage::helper('blog')->__('Image'),
@@ -66,38 +86,7 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Edit_Tab_Form extends Mage_Adminhtml_Bl
             'name' => 'image',
             'note' => '(*.jpg, *.png, *.gif, *.png)',
         ));
-        //Category
-        $categoriesCollection = Mage::helper('blog')->getCategories();
-        $categories = array();
-        if (count($categoriesCollection)) {
-            foreach ($categoriesCollection as $catogory) {
-                $categories[] = array(
-                    'label' => $catogory->getName(),
-                    'value' => $catogory->getId()
-                );
-            }
-            $fieldset->addField(
-                    'category_id', 'multiselect', array(
-                'name' => 'category_id[]',
-                'label' => Mage::helper('blog')->__('Category'),
-                'title' => Mage::helper('blog')->__('Category'),
-                'required' => true,
-                'style' => 'height: 120px;',
-                'values' => $categories,
-                    )
-            );
-        }
-        //Short Description
         $config = Mage::getSingleton('cms/wysiwyg_config')->getConfig();
-        $fieldset->addField(
-                'short_description', 'editor', array(
-            'name' => 'short_description',
-            'label' => Mage::helper('blog')->__('Short Description'),
-            'title' => Mage::helper('blog')->__('Short Description'),
-            'style' => 'width:550px; height:100px;',
-            'config' => $config,
-                )
-        );
         //Description
         $fieldset->addField(
                 'description', 'editor', array(
@@ -108,11 +97,7 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Edit_Tab_Form extends Mage_Adminhtml_Bl
             'config' => $config
                 )
         );
-        //Author
-        $fieldset->addField('author', 'text', array(
-            'label' => Mage::helper('blog')->__('Author'),
-            'name' => 'author',
-        ));
+
         //Status
         $fieldset->addField('status', 'select', array(
             'label' => Mage::helper('blog')->__('Status'),
@@ -128,16 +113,14 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Edit_Tab_Form extends Mage_Adminhtml_Bl
                 ),
             ),
         ));
-        if (Mage::getSingleton('adminhtml/session')->getBlogData()) {
-            $form->setValues(Mage::getSingleton('adminhtml/session')->getBlogData());
-            Mage::getSingleton('adminhtml/session')->setBlogData(null);
-        } elseif (Mage::registry('blog_data')) {
-            $data = Mage::registry('blog_data');
-            if (empty($data->getAuthor())) {
-                $data->setAuthor(Mage::getSingleton('admin/session')->getUser()->getName());
-            }
+        if (Mage::getSingleton('adminhtml/session')->getCategoryData()) {
+            $form->setValues(Mage::getSingleton('adminhtml/session')->getCategoryData());
+            Mage::getSingleton('adminhtml/session')->setCategoryData(null);
+        } elseif (Mage::registry('category_data')) {
+            $data = Mage::registry('category_data');
             $form->setValues($data);
         }
         return parent::_prepareForm();
     }
+
 }

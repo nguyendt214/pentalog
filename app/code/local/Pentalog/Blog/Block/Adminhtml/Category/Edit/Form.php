@@ -1,6 +1,6 @@
 <?php
 
-class Pentalog_Blog_Block_Adminhtml_Blog_Edit_Form extends Mage_Adminhtml_Block_Widget_Form {
+class Pentalog_Blog_Block_Adminhtml_Category_Edit_Form extends Mage_Adminhtml_Block_Widget_Form {
 
     protected function _prepareForm() {
         $form = new Varien_Data_Form(array(
@@ -15,4 +15,5 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Edit_Form extends Mage_Adminhtml_Block_
         $this->setForm($form);
         return parent::_prepareForm();
     }
+
 }

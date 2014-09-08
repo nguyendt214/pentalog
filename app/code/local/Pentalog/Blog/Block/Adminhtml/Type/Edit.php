@@ -1,13 +1,14 @@
 <?php
-
-class Pentalog_Blog_Block_Adminhtml_Blog_Edit extends Mage_Adminhtml_Block_Widget_Form_Container {
+/*
+  @author: Kevin (ndotrong@pentalog.fr)
+ */
+class Pentalog_Blog_Block_Adminhtml_Type_Edit extends Mage_Adminhtml_Block_Widget_Form_Container {
 
     public function __construct() {
         parent::__construct();
-
-        $this->_objectId = 'id';
+        $this->_objectId = 'type_id';
         $this->_blockGroup = 'blog';
-        $this->_controller = 'adminhtml_blog';
+        $this->_controller = 'adminhtml_type';
 
         $this->_updateButton('save', 'label', Mage::helper('blog')->__('Save Article'));
         $this->_updateButton('delete', 'label', Mage::helper('blog')->__('Delete Article'));
@@ -34,10 +35,10 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Edit extends Mage_Adminhtml_Block_Widge
     }
 
     public function getHeaderText() {
-        if (Mage::registry('blog_data') && Mage::registry('blog_data')->getId()) {
-            return Mage::helper('blog')->__("Edit Article '%s'", $this->htmlEscape(Mage::registry('blog_data')->getTitle()));
+        if (Mage::registry('type_data') && Mage::registry('type_data')->getId()) {
+            return Mage::helper('blog')->__("Edit Type '%s'", $this->htmlEscape(Mage::registry('type_data')->getTitle()));
         } else {
-            return Mage::helper('blog')->__('Add Article');
+            return Mage::helper('blog')->__('Add Type');
         }
     }
 

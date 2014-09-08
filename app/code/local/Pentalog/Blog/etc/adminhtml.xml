@@ -10,7 +10,7 @@
                     <sort_order>1</sort_order>   
                     <children>
                         <blog>
-                            <title>Manage Blog</title>
+                            <title>Manage Article</title>
                             <sort_order>0</sort_order>
                             <action>blog/adminhtml_blog</action>
                         </blog>
@@ -34,13 +34,6 @@
             </children>
         </xpentalog>
     </menu>
-    <layout>
-        <updates>
-            <blog>
-                <file>blog.xml</file>
-            </blog>
-        </updates>
-    </layout>
     <acl>
         <resources>
             <all>
@@ -68,7 +61,7 @@
                                 <title>Blog Module</title>
                                 <children>
                                     <blog>
-                                        <title>Manage Blog</title>
+                                        <title>Manage Article</title>
                                         <sort_order>0</sort_order>
                                     </blog>
                                     <category>

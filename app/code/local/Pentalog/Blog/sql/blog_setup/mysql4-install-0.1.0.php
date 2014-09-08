@@ -8,11 +8,12 @@ $installer = $this;
 $installer->startSetup();
 //Blog table
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('blog')};
-CREATE TABLE {$this->getTable('blog')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blog/blog')};
+CREATE TABLE {$this->getTable('blog/blog')} (
   `blog_id` int(11) unsigned NOT NULL auto_increment,
+  `identifier` varchar(255) NOT NULL default '',
   `url` varchar(255) NOT NULL default '',
-  `name` varchar(255) NOT NULL default '',
+  `title` varchar(255) NOT NULL default '',
   `short_description` varchar(255) NOT NULL default '',
   `description` text NOT NULL default '',
   `author` varchar(100) NOT NULL default '',
@@ -27,9 +28,10 @@ CREATE TABLE {$this->getTable('blog')} (
 //category table
 
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('category')};
-CREATE TABLE {$this->getTable('category')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blog/category')};
+CREATE TABLE {$this->getTable('blog/category')} (
   `category_id` int(11) unsigned NOT NULL auto_increment,
+  `identifier` varchar(255) NOT NULL default '',
   `url` varchar(255) NOT NULL default '',
   `name` varchar(255) NOT NULL default '',
   `short_description` varchar(255) NOT NULL default '',
@@ -44,8 +46,8 @@ CREATE TABLE {$this->getTable('category')} (
     ");
 //Reference between Blog and Categoy
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('blogcategory')};
-CREATE TABLE {$this->getTable('blogcategory')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blog/blogcategory')};
+CREATE TABLE {$this->getTable('blog/blogcategory')} (
   `blog_category_id` int(11) unsigned NOT NULL auto_increment,
   `category_id` int(11) NOT NULL,
   `blog_id` int(11) NOT NULL,
@@ -54,8 +56,8 @@ CREATE TABLE {$this->getTable('blogcategory')} (
     ");
 //Reference between Blog and Store View
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('blogstore')};
-CREATE TABLE {$this->getTable('blogstore')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blog/blogstore')};
+CREATE TABLE {$this->getTable('blog/blogstore')} (
   `blog_store_id` int(11) unsigned NOT NULL auto_increment,
   `store_id` int(11) NOT NULL,
   `blog_id` int(11) NOT NULL,
@@ -65,8 +67,8 @@ CREATE TABLE {$this->getTable('blogstore')} (
 
 //Reference between Category and Store View
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('categorystore')};
-CREATE TABLE {$this->getTable('categorystore')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blog/categorystore')};
+CREATE TABLE {$this->getTable('blog/categorystore')} (
   `category_store_id` int(11) unsigned NOT NULL auto_increment,
   `store_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -75,8 +77,8 @@ CREATE TABLE {$this->getTable('categorystore')} (
     ");
 //Comments table
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('comment')};
-CREATE TABLE {$this->getTable('comment')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blog/comment')};
+CREATE TABLE {$this->getTable('blog/comment')} (
   `comment_id` int(11) unsigned NOT NULL auto_increment,
   `title` varchar(255) NOT NULL,
   `user_name` varchar(255),
@@ -92,8 +94,8 @@ CREATE TABLE {$this->getTable('comment')} (
     ");
 //Reference between Blog and Comment
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('blogcomment')};
-CREATE TABLE {$this->getTable('blogcomment')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blog/blogcomment')};
+CREATE TABLE {$this->getTable('blog/blogcomment')} (
   `blog_comment_id` int(11) unsigned NOT NULL auto_increment,
   `blog_id` int(11) NOT NULL,
   `comment_id` int(11) NOT NULL,
@@ -102,8 +104,8 @@ CREATE TABLE {$this->getTable('blogcomment')} (
     ");
 //Type table
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('type')};
-CREATE TABLE {$this->getTable('type')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blog/type')};
+CREATE TABLE {$this->getTable('blog/type')} (
   `type_id` int(11) unsigned NOT NULL auto_increment,
   `title` varchar(255) NOT NULL,
   `style_name` varchar(255),
@@ -113,8 +115,8 @@ CREATE TABLE {$this->getTable('type')} (
     ");
 //Type and Category relationship
 $installer->run("
--- DROP TABLE IF EXISTS {$this->getTable('categorytype')};
-CREATE TABLE {$this->getTable('categorytype')} (
+-- DROP TABLE IF EXISTS {$this->getTable('blog/categorytype')};
+CREATE TABLE {$this->getTable('blog/categorytype')} (
   `category_type_id` int(11) unsigned NOT NULL auto_increment,
   `category_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,

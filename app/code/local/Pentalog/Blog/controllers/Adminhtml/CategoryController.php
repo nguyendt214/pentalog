@@ -4,26 +4,25 @@
  * @author: Kevin (ndotrong@pentalog.fr)
  * @return: Blog controller
  */
-
-class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_action {
+class Pentalog_Blog_Adminhtml_CategoryController extends Mage_Adminhtml_Controller_action {
 
     protected function _initAction() {
         $this->loadLayout()
-                ->_setActiveMenu('xpentalog/blog')
-                ->_addBreadcrumb(Mage::helper('adminhtml')->__('Article Manager'), Mage::helper('adminhtml')->__('Article Manager'));
+                ->_setActiveMenu('xpentalog/category')
+                ->_addBreadcrumb(Mage::helper('adminhtml')->__('Category Manager'), Mage::helper('adminhtml')->__('Category Manager'));
 
         return $this;
     }
 
     public function indexAction() {
-        $this->setTitle(__("Article Management"));
+        $this->setTitle(__("Category Management"));
         $this->_initAction()
                 ->renderLayout();
     }
 
     public function editAction() {
         $id = $this->getRequest()->getParam('id');
-        $model = Mage::getModel('blog/blog')->load($id);
+        $model = Mage::getModel('blog/category')->load($id);
 
         if ($model->getId() || $id == 0) {
             $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
@@ -31,25 +30,23 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
                 $model->setData($data);
             }
             if ($model->getId()) {
-                $this->setTitle(__("Edit Article"));
+                $this->setTitle(__("Edit Category"));
             } else {
-                $this->setTitle(__("Add new Article"));
+                $this->setTitle(__("Add new category"));
             }
-
-            Mage::register('blog_data', $model);
-
+            Mage::register('category_data', $model);
             $this->loadLayout();
-            $this->_setActiveMenu('xpentalog/blog');
+            $this->_setActiveMenu('xpentalog/category');
 
             $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
 
-            $this->_addContent($this->getLayout()->createBlock('blog/adminhtml_blog_edit'))
-                    ->_addLeft($this->getLayout()->createBlock('blog/adminhtml_blog_edit_tabs'));
+            $this->_addContent($this->getLayout()->createBlock('blog/adminhtml_category_edit'))
+                    ->_addLeft($this->getLayout()->createBlock('blog/adminhtml_category_edit_tabs'));
 
             $this->getLayout()->getBlock('head')->setCanLoadTinyMce(true);
             $this->renderLayout();
         } else {
-            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('blog')->__('Article does not exist'));
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('blog')->__('Category does not exist'));
             $this->_redirect('*/*/');
         }
     }
@@ -74,6 +71,11 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
                         mkdir($xpentalogBlogDir);
                         @chmod($xpentalogBlogDir, 0777);
                     }
+                    if (!is_dir($xpentalogBlogCategoryDir = $mediaDir . DS . 'xpentalog' . DS . 'blog' .DS. 'catogory')) {
+                        mkdir($xpentalogBlogCategoryDir);
+                        @chmod($xpentalogBlogCategoryDir, 0777);
+                    }
+                    
                     /* Starting upload */
                     $uploader = new Varien_File_Uploader('image');
                     // Any extention would work
@@ -81,11 +83,11 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
                     $uploader->setAllowRenameFiles(false);
                     $uploader->setFilesDispersion(false);
                     // We set media as the upload dir
-                    $path = $mediaDir . DS . 'xpentalog' . DS . 'blog';
+                    $path = $mediaDir . DS . 'xpentalog' . DS . 'blog' .DS. 'category';
                     $uploader->save($path, $_FILES['image']['name']);
 
                     //init data to save in database
-                    $data['image'] = 'xpentalog/blog/' . $_FILES['image']['name'];
+                    $data['image'] = 'xpentalog/blog/category/' . $_FILES['image']['name'];
                 } catch (Exception $e) {
                     Mage::helper('blog')->pentalogLog("System don't support this file: " . $e->getMessage());
                 }
@@ -93,10 +95,9 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
                 unset($data['image']);
             }
 
-            $model = Mage::getModel('blog/blog');
+            $model = Mage::getModel('blog/category');
             $model->setData($data)
                     ->setId($this->getRequest()->getParam('id'));
-
             try {
                 $format = Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM);
                 if (isset($data['created_time']) && $data['created_time']) {
@@ -109,7 +110,7 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
                 }
                 $model->save();
 
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('blog')->__('Article was successfully saved'));
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('blog')->__('Category was successfully saved'));
                 Mage::getSingleton('adminhtml/session')->setFormData(false);
 
                 if ($this->getRequest()->getParam('back')) {
@@ -137,7 +138,7 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
                 $model->setId($this->getRequest()->getParam('id'))
                         ->delete();
 
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Article was successfully deleted'));
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully deleted'));
                 $this->_redirect('*/*/');
             } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
@@ -150,7 +151,7 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
     public function massDeleteAction() {
         $blogIds = $this->getRequest()->getParam('blog');
         if (!is_array($blogIds)) {
-            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select article(s)'));
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select item(s)'));
         } else {
             try {
                 foreach ($blogIds as $blogId) {
@@ -172,7 +173,7 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
     public function massStatusAction() {
         $blogIds = $this->getRequest()->getParam('blog');
         if (!is_array($blogIds)) {
-            Mage::getSingleton('adminhtml/session')->addError($this->__('Please select article(s)'));
+            Mage::getSingleton('adminhtml/session')->addError($this->__('Please select item(s)'));
         } else {
             try {
                 foreach ($blogIds as $blogId) {
@@ -193,16 +194,16 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
     }
 
     public function exportCsvAction() {
-        $fileName = 'article.csv';
-        $content = $this->getLayout()->createBlock('blog/adminhtml_blog_grid')
+        $fileName = 'category.csv';
+        $content = $this->getLayout()->createBlock('blog/adminhtml_category_grid')
                 ->getCsv();
 
         $this->_sendUploadResponse($fileName, $content);
     }
 
     public function exportXmlAction() {
-        $fileName = 'article.xml';
-        $content = $this->getLayout()->createBlock('blog/adminhtml_blog_grid')
+        $fileName = 'category.xml';
+        $content = $this->getLayout()->createBlock('blog/adminhtml_category_grid')
                 ->getXml();
 
         $this->_sendUploadResponse($fileName, $content);
@@ -229,6 +230,7 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
     }
 
     protected function _isAllowed() {
-        return Mage::getSingleton('admin/session')->isAllowed('admin/xpentalog/blog/blog');
+        return Mage::getSingleton('admin/session')->isAllowed('admin/xpentalog/blog/category');
     }
+
 }

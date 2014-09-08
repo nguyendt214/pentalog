@@ -3,47 +3,39 @@
  * @author: Kevin (ndotrong@pentalog.fr)
  */
 
-class Pentalog_Blog_Block_Adminhtml_Blog_Grid extends Mage_Adminhtml_Block_Widget_Grid {
+class Pentalog_Blog_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_Widget_Grid {
 
     public function __construct() {
         parent::__construct();
-        $this->setId('blogGrid');
-        $this->setDefaultSort('blog_id');
+        $this->setId('categoryGrid');
+        $this->setDefaultSort('category_id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
     }
 
     protected function _prepareCollection() {
-        $collection = Mage::getModel('blog/blog')->getCollection();
+        $collection = Mage::getModel('blog/category')->getCollection();
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
 
     protected function _prepareColumns() {
-        $this->addColumn('blog_id', array(
+        $this->addColumn('category_id', array(
             'header' => Mage::helper('blog')->__('ID'),
             'align' => 'right',
             'width' => '50px',
-            'index' => 'blog_id',
+            'index' => 'category_id',
         ));
-        $this->addColumn('title', array(
-            'header' => Mage::helper('blog')->__('Title'),
+        $this->addColumn('name', array(
+            'header' => Mage::helper('blog')->__('Name'),
             'align' => 'left',
-            'index' => 'title',
+            'index' => 'name',
         ));
         $this->addColumn('identifier', array(
             'header' => Mage::helper('blog')->__('Identifier'),
             'align' => 'left',
             'index' => 'identifier',
         ));
-
-        $this->addColumn(
-                'author', array(
-            'header' => Mage::helper('blog')->__('Author'),
-            'width' => '150px',
-            'index' => 'author',
-                )
-        );
 
         $this->addColumn(
                 'created_time', array(
@@ -104,7 +96,7 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Grid extends Mage_Adminhtml_Block_Widge
     }
 
     protected function _prepareMassaction() {
-        $this->setMassactionIdField('blog_id');
+        $this->setMassactionIdField('category_id');
         $this->getMassactionBlock()->setFormFieldName('blog');
 
         $this->getMassactionBlock()->addItem('delete', array(

@@ -1,16 +1,16 @@
 <?php
 
-class Pentalog_Blog_Block_Adminhtml_Blog_Edit extends Mage_Adminhtml_Block_Widget_Form_Container {
+class Pentalog_Blog_Block_Adminhtml_Category_Edit extends Mage_Adminhtml_Block_Widget_Form_Container {
 
     public function __construct() {
         parent::__construct();
 
-        $this->_objectId = 'id';
+        $this->_objectId = 'category_id';
         $this->_blockGroup = 'blog';
-        $this->_controller = 'adminhtml_blog';
+        $this->_controller = 'adminhtml_category';
 
-        $this->_updateButton('save', 'label', Mage::helper('blog')->__('Save Article'));
-        $this->_updateButton('delete', 'label', Mage::helper('blog')->__('Delete Article'));
+        $this->_updateButton('save', 'label', Mage::helper('blog')->__('Save Category'));
+        $this->_updateButton('delete', 'label', Mage::helper('blog')->__('Delete Category'));
 
         $this->_addButton('saveandcontinue', array(
             'label' => Mage::helper('adminhtml')->__('Save And Continue Edit'),
@@ -34,10 +34,10 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Edit extends Mage_Adminhtml_Block_Widge
     }
 
     public function getHeaderText() {
-        if (Mage::registry('blog_data') && Mage::registry('blog_data')->getId()) {
-            return Mage::helper('blog')->__("Edit Article '%s'", $this->htmlEscape(Mage::registry('blog_data')->getTitle()));
+        if (Mage::registry('category_data') && Mage::registry('category_data')->getId()) {
+            return Mage::helper('blog')->__("Edit Category '%s'", $this->htmlEscape(Mage::registry('category_data')->getName()));
         } else {
-            return Mage::helper('blog')->__('Add Article');
+            return Mage::helper('blog')->__('Add Category');
         }
     }
 
