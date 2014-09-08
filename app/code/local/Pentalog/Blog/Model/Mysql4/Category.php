@@ -70,7 +70,7 @@ class Pentalog_Blog_Model_Mysql4_Category extends Mage_Core_Model_Mysql4_Abstrac
         }
 
         //Save category type
-        $condition = $this->_getWriteAdapter()->quoteInto('category_type_id = ?', $object->getId());
+        $condition = $this->_getWriteAdapter()->quoteInto('category_id = ?', $object->getId());
         $this->_getWriteAdapter()->delete($this->getTable('blog/categorytype'), $condition);
         if (sizeof((array) $object->getData('type')) > 0) {
             $storeArray = array();

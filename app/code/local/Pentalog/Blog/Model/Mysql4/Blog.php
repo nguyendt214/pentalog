@@ -71,7 +71,7 @@ class Pentalog_Blog_Model_Mysql4_Blog extends Mage_Core_Model_Mysql4_Abstract {
         }
 
         //Save article categories
-        $condition = $this->_getWriteAdapter()->quoteInto('blog_category_id = ?', $object->getId());
+        $condition = $this->_getWriteAdapter()->quoteInto('blog_id = ?', $object->getId());
         $this->_getWriteAdapter()->delete($this->getTable('blog/blogcategory'), $condition);
         if (sizeof((array) $object->getData('category_id')) > 0) {
             foreach ((array) $object->getData('category_id') as $store) {
