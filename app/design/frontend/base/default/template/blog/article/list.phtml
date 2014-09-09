@@ -1,0 +1,12 @@
+<?php
+$articles = $this->getArticles();
+?>
+<?php if (count($articles) > 0): ?>
+<div class="category-products">
+    <ul>
+        
+    </ul>
+</div>
+<?php else: ?>
+    <p class="note-msg"><?php echo $this->__('There are no article matching the selection.') ?></p>
+<?php endif; ?>

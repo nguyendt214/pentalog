@@ -1,16 +1,10 @@
 <?xml version="1.0"?>
 <config>
-    <tabs>
-        <xpentalog translate="label" module="blog">
-            <label>Pentalog Configurations</label>
-            <sort_order>10</sort_order>
-        </xpentalog>
-    </tabs>
     <sections>
         <blog_section translate="label" module="blog">                    
             <label>Blog</label>
             <class>separator-top</class>
-            <tab>xpentalog</tab>
+            <tab>xkevin</tab>
             <sort_order>100</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
@@ -25,7 +19,7 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>  
                     <fields>
-                        <enable>
+                        <active>
                             <label>Enable/Disable</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -33,7 +27,16 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </enable>
+                        </active>
+                        <layout>
+                            <label>Page Layout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>blog/layouts</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </layout>
                     </fields>
                 </blog_config>
             </groups>

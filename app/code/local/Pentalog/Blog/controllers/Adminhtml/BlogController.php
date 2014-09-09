@@ -98,15 +98,13 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
                     ->setId($this->getRequest()->getParam('id'));
 
             try {
-                $format = Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM);
-                if (isset($data['created_time']) && $data['created_time']) {
-                    $dateFrom = Mage::app()->getLocale()->date($data['created_time'], $format);
-                    $model->setCreatedTime(Mage::getModel('core/date')->gmtDate(null, $dateFrom->getTimestamp()));
+                if ((int)$this->getRequest()->getParam('id') > 0) {
                     $model->setUpdateTime(Mage::getModel('core/date')->gmtDate());
                 } else {
                     $model->setCreatedTime(Mage::getModel('core/date')->gmtDate());
                     $model->setUpdateTime(Mage::getModel('core/date')->gmtDate());
                 }
+                
                 $model->save();
 
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('blog')->__('Article was successfully saved'));
@@ -231,4 +229,5 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
     protected function _isAllowed() {
         return Mage::getSingleton('admin/session')->isAllowed('admin/xpentalog/blog/blog');
     }
+
 }

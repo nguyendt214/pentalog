@@ -99,15 +99,13 @@ class Pentalog_Blog_Adminhtml_CategoryController extends Mage_Adminhtml_Controll
             $model->setData($data)
                     ->setId($this->getRequest()->getParam('id'));
             try {
-                $format = Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM);
-                if (isset($data['created_time']) && $data['created_time']) {
-                    $dateFrom = Mage::app()->getLocale()->date($data['created_time'], $format);
-                    $model->setCreatedTime(Mage::getModel('core/date')->gmtDate(null, $dateFrom->getTimestamp()));
+                if ((int)$this->getRequest()->getParam('id') > 0) {
                     $model->setUpdateTime(Mage::getModel('core/date')->gmtDate());
                 } else {
                     $model->setCreatedTime(Mage::getModel('core/date')->gmtDate());
                     $model->setUpdateTime(Mage::getModel('core/date')->gmtDate());
                 }
+                
                 $model->save();
 
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('blog')->__('Category was successfully saved'));

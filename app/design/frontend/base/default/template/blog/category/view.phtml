@@ -1,0 +1,21 @@
+<?php $category = $this->getCategory(); ?>
+<div class="blog-category type-display-<?php echo $category->getType(); ?>">
+    <h1 class="title">
+        <?php echo $category->getName(); ?>
+    </h1>
+
+    <?php
+    $categoryImg = $category->getImage();
+    if (strlen($categoryImg)):
+        ?>
+        <div class="image">
+            <img src="<?php echo Mage::helper('all')->imageSrc($categoryImg); ?>" title="<?php echo $category->getName(); ?>"/>
+        </div>
+        <div class="description">
+            <?php echo nl2br($category->getDescription()); ?>
+        </div>
+    <?php endif; ?>
+</div>
+<div id="category_article">
+    <?php echo $this->getChildHtml('article_list'); ?>
+</div>

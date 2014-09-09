@@ -3,8 +3,11 @@
     <default>
     </default>
     <blog_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
         <reference name="content">
-            <block type="blog/blog" name="blog" template="blog/blog.phtml" />
+            <block type="blog/category_list" name="blog" template="blog/category/list.phtml" />
         </reference>
     </blog_index_index>
 </layout> 

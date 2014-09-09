@@ -1,4 +1,5 @@
 <?php
+
 /*
  * @author: Kevin (ndotrong@pentalog.fr)
  */
@@ -52,7 +53,7 @@ class Pentalog_Blog_Model_Mysql4_Category extends Mage_Core_Model_Mysql4_Abstrac
 
     protected function _afterSave(Mage_Core_Model_Abstract $object) {
         //Save category store
-        $condition = $this->_getReadAdapter()->quoteInto('category_id', $object->getId());
+        $condition = $this->_getReadAdapter()->quoteInto('category_id = ?', $object->getId());
         $this->_getWriteAdapter()->delete($this->getTable('blog/categorystore'), $condition);
 
         if (!$object->getData('store_id')) {
@@ -109,5 +110,19 @@ class Pentalog_Blog_Model_Mysql4_Category extends Mage_Core_Model_Mysql4_Abstrac
         }
         return parent::_afterLoad($object);
     }
-
+    /*
+     * Check this category avaiable on current store view or not
+     */
+    protected function _getLoadSelect($field, $value, $object) {
+        $select = parent::_getLoadSelect($field, $value, $object);
+        if ($object->getStoreId() and !Mage::app()->isSingleStoreMode()) {
+            $select
+                    ->join(array('categoryStore' => $this->getTable('blog/categorystore')), $this->getMainTable() . '.category_id = `categoryStore`.category_id')
+                    ->where('`categoryStore`.store_id in (0, ?) ', $object->getStoreId())
+                    ->order('store_id DESC')
+                    ->limit(1)
+            ;
+        }
+        return $select;
+    }
 }

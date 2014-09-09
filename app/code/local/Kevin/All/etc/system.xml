@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <xkevin translate="label" module="all">
+            <label>Pentalog Configurations</label>
+            <sort_order>10</sort_order>
+        </xkevin>
+    </tabs>
+</config>

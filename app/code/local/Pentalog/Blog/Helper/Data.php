@@ -9,7 +9,7 @@ class Pentalog_Blog_Helper_Data extends Mage_Core_Helper_Abstract {
      * Return category collection
      */
 
-    public function getCategories($filter = null, $sortField = 'category_id', $sort = 'asc') {
+    public function getCategories($filter = null, $sortField = 'category_id', $sort = 'asc', $storeId = null) {
         try {
             $categories = Mage::getModel('blog/category')->getCollection()
                     ->setOrder($sortField, $sort)
@@ -18,6 +18,9 @@ class Pentalog_Blog_Helper_Data extends Mage_Core_Helper_Abstract {
                 foreach ($filter as $key => $value) {
                     $categories->addFieldToFilter($key, $value);
                 }
+            }
+            if($storeId){
+                $categories->addFilterByStore($categories, $storeId);
             }
             return $categories;
         } catch (Exception $e) {

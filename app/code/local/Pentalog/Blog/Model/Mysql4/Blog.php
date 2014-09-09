@@ -53,7 +53,7 @@ class Pentalog_Blog_Model_Mysql4_Blog extends Mage_Core_Model_Mysql4_Abstract {
 
     protected function _afterSave(Mage_Core_Model_Abstract $object) {
         //Save article store
-        $condition = $this->_getReadAdapter()->quoteInto('blog_id', $object->getId());
+        $condition = $this->_getReadAdapter()->quoteInto('blog_id = ?', $object->getId());
         $this->_getWriteAdapter()->delete($this->getTable('blog/blogstore'), $condition);
 
         if (!$object->getData('store_id')) {
