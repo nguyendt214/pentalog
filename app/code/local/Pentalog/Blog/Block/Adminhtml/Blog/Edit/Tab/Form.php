@@ -41,9 +41,20 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Edit_Tab_Form extends Mage_Adminhtml_Bl
         $fieldset->addField(
                 'url', 'text', array(
             'label' => Mage::helper('blog')->__('URL'),
-            'class' => '',
+            'class' => 'pentalog-blog-validate-url',
+            'required' => true,
             'name' => 'url',
-            'after_element_html' => '<span class="hint">' . $urlUniqueText . '</span>',
+            'after_element_html' => '<span class="hint">' . $urlUniqueText . '</span>'
+            . "<script>
+                        Validation.add(
+                            'pentalog-blog-validate-url',
+                            '" . $urlErrorMess . "',
+                            function(v, elm) {
+                                var regex = new RegExp(/^[.a-zA-Z0-9_-]+$/);
+                                return v.match(regex);
+                            }
+                        );
+                        </script>",
                 )
         );
         //Store view
@@ -140,4 +151,5 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Edit_Tab_Form extends Mage_Adminhtml_Bl
         }
         return parent::_prepareForm();
     }
+
 }

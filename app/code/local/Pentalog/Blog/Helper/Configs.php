@@ -16,6 +16,16 @@ class Pentalog_Blog_Helper_Configs extends Mage_Core_Helper_Abstract {
         $store = Mage::app()->getStore()->getStoreId();
         if ($this->_configs === null) {
             $this->_configs = array(
+                'blog_list_image_width' => '150px',
+                'blog_list_image_height' => '150px',
+                'column_article' => '4',
+                'toolbar_default_direction' => 'desc',
+                'toolbar_default_sort_by' => 'blog_id',
+                'toolbar_order_list' => array(
+                    'blog_id' => 'Newest',
+                    'title' => 'Title',
+                ),
+                'default_article_image' => 'xpentalog/blog/defaultImage.jpg',
                 'blog_title' => 'Pentalog Blog',
                 'blog_active' => $this->getHelper()->getConfigValue('blog_section/blog_config/active', $store),
                 'blog_layout' => $this->getHelper()->getConfigValue('blog_section/blog_config/layout', $store),

@@ -1,0 +1,46 @@
+<?php
+$articles = $this->getArticles();
+$_heler = Mage::helper('all');
+$configs = Mage::helper('blog/configs')->getAllConfigs();
+?>
+<?php $_collectionSize = sizeof($articles) ?>
+<?php $_columnCount = $configs->getColumnArticle(); ?>
+<?php if ($_collectionSize > 0): ?>
+    <div class="category-products">
+        <?php echo $this->getToolbarHtml(); ?>
+        <?php
+        $i = 0;
+        foreach ($articles as $_article):
+            ?>
+            <?php if ($i++ % $_columnCount == 0): ?>
+                <ul class="products-grid">
+                <?php endif ?>
+                <li class="item<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
+                    <a href="<?php echo Mage::helper('blog/blog')->getBlogUrl($_article); ?>" title="<?php echo $_article->getTitle(); ?>" class="article-image">
+                        <?php if (strlen($_article->getImage())): ?>
+                            <img src="<?php echo $_heler->imageSrc($_article->getImage()); ?>" width="<?php echo $configs->getBlogListImageWidth(); ?>" height="<?php echo $configs->getBlogListImageHeight(); ?>" alt="" />
+                        <?php else: ?>
+                            <img src="<?php echo $_heler->imageSrc($configs->getDefaultArticleImage()); ?>" width="<?php echo $configs->getBlogListImageWidth(); ?>" height="<?php echo $configs->getBlogListImageHeight(); ?>" alt="" />
+                        <?php endif; ?>
+                    </a>
+                    <div class="clear"></div>
+                    <div class="blog-name">
+                        <h2 class="article-name">
+                            <a href="<?php echo Mage::helper('blog/blog')->getBlogUrl($_article); ?>" title="<?php echo $this->stripTags($_article->getTitle(), null, true) ?>"><?php echo $_article->getTitle(); ?></a>
+                        </h2>
+                    </div>
+                    <div class="short-description">
+                        <?php echo nl2br($_article->getShortDescription());?>
+                    </div>
+                    <div class="action">
+                        <a href="<?php echo Mage::helper('blog/blog')->getBlogUrl($_article); ?>"><?php echo Mage::helper('blog')->__('Detail');?></a>
+                    </div>
+                </li>
+                <?php if ($i % $_columnCount == 0 || $i == $_collectionSize): ?>
+                </ul>
+            <?php endif ?>
+        <?php endforeach ?>
+    </div>
+<?php else: ?>
+    <p class="note-msg"><?php echo $this->__('There are no article matching the selection.') ?></p>
+<?php endif; ?>

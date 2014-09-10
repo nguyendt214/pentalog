@@ -18,7 +18,7 @@
         <layout>
             <updates>
                 <blog>
-                    <file>blog.xml</file>
+                    <file>xpentalog_blog.xml</file>
                 </blog>
             </updates>
         </layout>
@@ -36,7 +36,7 @@
         <layout>
             <updates>
                 <blog>
-                    <file>blog.xml</file>
+                    <file>xpentalog_blog.xml</file>
                 </blog>
             </updates>
         </layout>

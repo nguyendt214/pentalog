@@ -47,7 +47,17 @@ class Pentalog_Blog_Block_Adminhtml_Category_Edit_Tab_Form extends Mage_Adminhtm
             'label' => Mage::helper('blog')->__('URL'),
             'class' => '',
             'name' => 'url',
-            'after_element_html' => '<span class="hint">' . $urlUniqueText . '</span>',
+            'after_element_html' => '<span class="hint">' . $urlUniqueText . '</span>'
+            . "<script>
+                        Validation.add(
+                            'pentalog-blog-validate-url',
+                            '" . $urlErrorMess . "',
+                            function(v, elm) {
+                                var regex = new RegExp(/^[.a-zA-Z0-9_-]+$/);
+                                return v.match(regex);
+                            }
+                        );
+                        </script>",
                 )
         );
 
