@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of Toolbar
  *
@@ -38,8 +39,12 @@ class Kevin_All_Helper_Toolbar extends Mage_Core_Helper_Abstract {
      * Return toolbar block
      * Set toolbar custom template
      */
+
     public function getToolbarBlock($block) {
-        return $block->getLayout()->createBlock('all/toolbar_toolbar', microtime())->setTemplate('kevin/all/toolbar.phtml');
+        $toolbarBlock = $block->getLayout()->createBlock('all/toolbar_toolbar', microtime())->setTemplate('kevin/all/toolbar.phtml');
+        $pager = $block->getLayout()->createBlock('page/html_pager', microtime())->setTemplate('kevin/all/pager.phtml');
+        $toolbarBlock->setChild('product_list_toolbar_pager', $pager);
+        return $toolbarBlock;
     }
 
 }

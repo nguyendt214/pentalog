@@ -25,11 +25,7 @@
         </reference>
         <reference name="content">
             <block type="blog/category_view" name="category.view" template="pentalog/blog/category/view.phtml">
-                <block type="blog/article_list" name="article_list" template="pentalog/blog/article/list.phtml">
-                    <block type="all/toolbar_toolbar" name="pentalog_blog_list_toolbar" template="kevin/all/toolbar.phtml">
-                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
-                    </block>
-                </block>
+                <block type="blog/article_list" name="article_list" template="pentalog/blog/article/list.phtml"/>
             </block>
         </reference>
     </blog_category_view>

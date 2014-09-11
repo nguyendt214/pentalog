@@ -46,12 +46,11 @@ class Pentalog_Blog_Block_Article_List extends Mage_Core_Block_Template {
          */
         Mage::helper('all/toolbar')->initToolbar(
                 $this, array(
-            'orders' => array('blog_id' => $this->__('Newest'), 'title' => $this->__('Title')),
-            'default_order' => 'blog_id',
-            'dir' => 'desc',
-            'limits' => 3,
+            'orders' => Mage::helper('blog/configs')->getAllConfigs()->getToolbarOrderList(),
+            'default_order' => Mage::helper('blog/configs')->getAllConfigs()->getToolbarDefaultSortBy(),
+            'dir' => Mage::helper('blog/configs')->getAllConfigs()->getToolbarDefaultDirection(),
+            'defaultAvailbleLimit' => Mage::helper('blog/configs')->getAllConfigs()->getToolbarShowPerPage(),
             'method' => 'getArticles',
-            'defaultAvailbleLimit' => array(1=>1, 2=>2, 3=>3),
                 )
         );
         return parent::_beforeToHtml();
