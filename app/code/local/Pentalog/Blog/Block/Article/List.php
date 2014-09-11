@@ -15,14 +15,16 @@ class Pentalog_Blog_Block_Article_List extends Mage_Core_Block_Template {
     }
 
     public function getArticles() {
-        $category = $this->getCategory();
-        $article = Mage::getSingleton('blog/blog')->getCollection();
-
-        $article->addCategoryFilter($category);
-        if (Mage::helper('all')->multiStoreView()) {
-            $article->addStoreFilter(Mage::app()->getStore()->getStoreId());
+        if (!$this->hasData('article')) {
+            $category = $this->getCategory();
+            $article = Mage::getSingleton('blog/blog')->getCollection();
+            $article->addCategoryFilter($category);
+            if (Mage::helper('all')->multiStoreView()) {
+                $article->addStoreFilter(Mage::app()->getStore()->getStoreId());
+            }
+            $this->setData('article', $article);
         }
-        return $article;
+        return $this->getData('article');
     }
 
     /**
@@ -39,55 +41,20 @@ class Pentalog_Blog_Block_Article_List extends Mage_Core_Block_Template {
      * another block (was problem with search result)
      */
     protected function _beforeToHtml() {
-        
+        /*
+         * init toolbar
+         */
         Mage::helper('all/toolbar')->initToolbar(
-            $this,
-            array(
-                 'orders'        => array('created_time' => $this->__('Created At'), 'email' => $this->__('Added By')),
-                 'default_order' => 'created_time',
-                 'dir'           => 'desc',
-                 'limits'        => 3,
-                 'method'        => 'getArticles'
-            )
+                $this, array(
+            'orders' => array('blog_id' => $this->__('Newest'), 'title' => $this->__('Title')),
+            'default_order' => 'blog_id',
+            'dir' => 'desc',
+            'limits' => 3,
+            'method' => 'getArticles',
+            'defaultAvailbleLimit' => array(1=>1, 2=>2, 3=>3),
+                )
         );
         return parent::_beforeToHtml();
-        
-//        $toolbar = $this->getToolbarBlock();
-//        // called prepare sortable parameters
-//        $collection = $this->getArticles();
-//        // use sortable parameters
-//        if ($sort = Mage::helper('blog/configs')->getAllConfigs()->getToolbarDefaultSortBy()) {
-//            $toolbar->setDefaultOrder($sort);
-//        }
-//        if ($dir = Mage::helper('blog/configs')->getAllConfigs()->getToolbarDefaultDirection()) {
-//            $toolbar->setDefaultDirection($dir);
-//        }
-//        //Disable view model: List, Grid
-//        $toolbar->disableViewSwitcher();
-//        
-//        if($orderList = Mage::helper('blog/configs')->getAllConfigs()->getToolbarOrderList()){
-//            $toolbar->setAvailableOrders($orderList);
-//        }
-//        // set collection to toolbar and apply sort
-//        $toolbar->setCollection($collection);
-//        $this->setChild('toolbar', $toolbar);
-//
-//        return parent::_beforeToHtml();
-    }
-
-    /**
-     * Retrieve Toolbar block
-     *
-     * @return Mage_Catalog_Block_Product_List_Toolbar
-     */
-    public function getToolbarBlock() {
-        if ($blockName = $this->getToolbarBlockName()) {
-            if ($block = $this->getLayout()->getBlock($blockName)) {
-                return $block;
-            }
-        }
-        $block = $this->getLayout()->createBlock('blog/category_toolbar', microtime());
-        return $block;
     }
 
 }
