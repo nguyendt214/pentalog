@@ -23,3 +23,17 @@ and open the template in the editor.
 .category-article .products-grid > li:nth-child(3n+1){
     clear: none;
 }
+
+/*
+Article view
+*/
+.blog-view .left{
+    float: left;
+    padding-right: 10px;
+}
+.clear{
+    clear: both;
+}
+.blog-view .description{
+    padding: 10px 0;
+}

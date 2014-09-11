@@ -1,0 +1,37 @@
+<?php
+$article = $this->getArticle();
+$configs = $this->getAllConfigs();
+$_helper = Mage::helper('blog');
+?>
+
+<div class="blog-view">
+    <div class='top'>
+        <div class="left">
+            <?php $image = $article->getImage(); ?>
+            <?php if (strlen($image)): ?>
+                <img src="<?php echo Mage::helper('all')->imageSrc($_article->getImage()); ?>" width="<?php echo $configs->getBlogDetailImageWidth(); ?>" height="<?php echo $configs->getBlogDetailImageHeight(); ?>" title="<?php echo $article->getTitle(); ?>"/>
+            <?php else: ?>
+                <img src="<?php echo Mage::helper('all')->imageSrc($configs->getDefaultArticleImage()); ?>" width="<?php echo $configs->getBlogDetailImageWidth(); ?>" height="<?php echo $configs->getBlogDetailImageHeight(); ?>" title="<?php echo $article->getTitle(); ?>"/>
+            <?php endif; ?>
+        </div>
+        <div class="right">
+            <h2><?php echo $article->getTitle(); ?></h2>
+            <div class="article-info">
+                <div class="author">
+                    <span class="label"><?php echo $_helper->__("Author"); ?></span>: <span><?php echo $article->getAuthor(); ?></span>
+                </div>
+                <div class="short-desctiption">
+                    <span><?php echo nl2br($article->getShortDescription()); ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="description">
+        <span><?php echo nl2br($article->getDescription()); ?></span>
+    </div>
+    <div class="clear"></div>
+    <div class='blog-comment' id='blog_comment'>
+        <?php echo $this->getChildHtml('comment'); ?>
+    </div>
+</div>

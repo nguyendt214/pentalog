@@ -115,5 +115,20 @@ class Pentalog_Blog_Model_Mysql4_Blog extends Mage_Core_Model_Mysql4_Abstract {
         }
         return parent::_afterLoad($object);
     }
+    /*
+     * Check this blog avaiable on current store view or not
+     */
+    protected function _getLoadSelect($field, $value, $object) {
+        $select = parent::_getLoadSelect($field, $value, $object);
+        if ($object->getStoreId() and !Mage::app()->isSingleStoreMode()) {
+            $select
+                    ->join(array('blogStore' => $this->getTable('blog/blogstore')), $this->getMainTable() . '.blog_id = `blogStore`.blog_id')
+                    ->where('`blogStore`.store_id in (0, ?) ', $object->getStoreId())
+                    ->order('store_id DESC')
+                    ->limit(1)
+            ;
+        }
+        return $select;
+    }
 
 }

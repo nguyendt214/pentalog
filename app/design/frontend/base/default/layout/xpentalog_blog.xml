@@ -29,4 +29,18 @@
             </block>
         </reference>
     </blog_category_view>
+    <blog_article_view>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>pentalog/blog/styles.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="blog/article_view" name="blog.view" template="pentalog/blog/article/view.phtml">
+                <block type="blog/comment_list" name="comment" template="pentalog/blog/comment/list.phtml">
+                    <block type="blog/comment_form" name="comment_form" template="pentalog/blog/comment/form.phtml"/>
+                </block>
+            </block>
+        </reference>
+    </blog_article_view>
 </layout> 

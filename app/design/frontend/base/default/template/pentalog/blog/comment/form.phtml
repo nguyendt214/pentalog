@@ -1,0 +1,50 @@
+<?php
+$article = $this->getArticle();
+$_helper = Mage::helper('blog');
+$configs = $this->getAllConfigs();
+$formData = $this->getFormData();
+?>
+<?php if ($this->allowWriteComment()): ?>
+    <h2><?php echo $_helper->__('Write Your Own Comment') ?></h2>
+    <form action="<?php echo $this->getActionForm(); ?>" method="post" name='comment_form'>
+        <input type='hidden' name='blog_id' value='<?php echo $article->getId(); ?>'/>
+        <input type='hidden' name='status' value='2'/>
+        <fieldset>
+            <ul class="form-list">
+                <li>
+                    <label for="name" class="required"><em>*</em><?php echo $_helper->__('Name') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="user_name" id="user_name" class="input-text required-entry" value="<?php echo $this->escapeHtml($this->getFormData()->getName()) ?>" />
+                    </div>
+                </li>
+                <li>
+                    <label for="email" class="required"><em>*</em><?php echo $_helper->__('Email') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="user_email" id="user_email" class="input-text required-entry validate-email" value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>" />
+                    </div>
+                </li>
+                <li>
+                    <label for="telephone"><?php echo $_helper->__('Telephone') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="user_telephone" id="user_telephone" class="input-text" value="<?php echo $this->escapeHtml($this->getFormData()->getTelephone()) ?>" />
+                    </div>
+                </li>
+                <li>
+                    <label for="summary_field" class="required"><em>*</em><?php echo $_helper->__('Summary of Your Comment') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="title" id="title" class="input-text required-entry" value="<?php echo $this->escapeHtml($this->getFormData()->getTitle()) ?>" />
+                    </div>
+                </li>
+                <li>
+                    <label for="review_field" class="required"><em>*</em><?php echo $_helper->__('Review') ?></label>
+                    <div class="input-box">
+                        <textarea name="content" id="content" cols="5" rows="3" class="required-entry"><?php echo $this->escapeHtml($this->getFormData()->getContent()) ?></textarea>
+                    </div>
+                </li>
+            </ul>
+        </fieldset>
+        <div class="buttons-set">
+            <button type="submit" title="<?php echo $this->__('Submit Review') ?>" class="button"><span><span><?php echo $this->__('Submit Review') ?></span></span></button>
+        </div>
+    </form>
+<?php endif; ?>
