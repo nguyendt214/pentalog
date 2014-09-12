@@ -2,3 +2,4 @@
 var/
 downloader/
 app/etc/local.xml
+/nbproject/private/

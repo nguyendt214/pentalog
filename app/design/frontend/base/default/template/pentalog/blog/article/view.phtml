@@ -3,7 +3,7 @@ $article = $this->getArticle();
 $configs = $this->getAllConfigs();
 $_helper = Mage::helper('blog');
 ?>
-
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <div class="blog-view">
     <div class='top'>
         <div class="left">

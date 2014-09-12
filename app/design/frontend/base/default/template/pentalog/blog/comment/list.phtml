@@ -1,5 +1,20 @@
-List comment
-
+<?php $comments = $this->getCommentList();?>
+<?php $_helper = Mage::helper('blog');?>
+<?php if(sizeof($comments)):?>
+    <div class="comment-list">
+        <?php foreach($comments as $comment):?>
+            <div class="item">
+                <h3><?php echo $comment->getTitle();?></h3>
+                <span><?php echo $_helper->__("User name:");?> </span> <span><?php echo $comment->getUserName();?></span>
+                <span><?php echo $_helper->__("User email:");?> </span> <span><?php echo $comment->getUserEmail();?></span>
+                <span><?php echo $_helper->__("User Telephone:");?> </span> <span><?php echo $comment->getUserTelephone();?></span>
+                <div class="comment-content">
+                    <?php echo nl2br($comment->getContent());?>
+                </div>
+            </div>
+        <?php endforeach;?>
+    </div>
+<?php endif;?>
 <div class='comment-form' id='comment_form'>
     <?php echo $this->getChildHtml('comment_form'); ?>
 </div>

@@ -6,27 +6,29 @@ $formData = $this->getFormData();
 ?>
 <?php if ($this->allowWriteComment()): ?>
     <h2><?php echo $_helper->__('Write Your Own Comment') ?></h2>
-    <form action="<?php echo $this->getActionForm(); ?>" method="post" name='comment_form'>
+    <form action="<?php echo $this->getActionForm(); ?>" method="post" name='comment_form' id="comment_form">
         <input type='hidden' name='blog_id' value='<?php echo $article->getId(); ?>'/>
         <input type='hidden' name='status' value='2'/>
+        <input type='hidden' name='created_time' value='<?php echo Mage::getModel('core/date')->gmtDate();?>'/>
+        <input type='hidden' name='update_time' value='<?php echo Mage::getModel('core/date')->gmtDate();?>'/>
         <fieldset>
             <ul class="form-list">
                 <li>
                     <label for="name" class="required"><em>*</em><?php echo $_helper->__('Name') ?></label>
                     <div class="input-box">
-                        <input type="text" name="user_name" id="user_name" class="input-text required-entry" value="<?php echo $this->escapeHtml($this->getFormData()->getName()) ?>" />
+                        <input type="text" name="user_name" id="user_name" class="input-text required-entry" value="<?php echo $this->escapeHtml($formData->getUserName()) ?>" />
                     </div>
                 </li>
                 <li>
                     <label for="email" class="required"><em>*</em><?php echo $_helper->__('Email') ?></label>
                     <div class="input-box">
-                        <input type="text" name="user_email" id="user_email" class="input-text required-entry validate-email" value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>" />
+                        <input type="text" name="user_email" id="user_email" class="input-text required-entry validate-email" value="<?php echo $this->escapeHtml($formData->getUserEmail()) ?>" />
                     </div>
                 </li>
                 <li>
                     <label for="telephone"><?php echo $_helper->__('Telephone') ?></label>
                     <div class="input-box">
-                        <input type="text" name="user_telephone" id="user_telephone" class="input-text" value="<?php echo $this->escapeHtml($this->getFormData()->getTelephone()) ?>" />
+                        <input type="text" name="user_telephone" id="user_telephone" class="input-text" value="<?php echo $this->escapeHtml($formData->getUserTelephone()) ?>" />
                     </div>
                 </li>
                 <li>
@@ -47,4 +49,9 @@ $formData = $this->getFormData();
             <button type="submit" title="<?php echo $this->__('Submit Review') ?>" class="button"><span><span><?php echo $this->__('Submit Review') ?></span></span></button>
         </div>
     </form>
+    <script type="text/javascript">
+        //<![CDATA[
+        var commentForm = new VarienForm('comment_form');
+        //]]>
+    </script>
 <?php endif; ?>

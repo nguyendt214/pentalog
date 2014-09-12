@@ -9,7 +9,7 @@ class Pentalog_Blog_Block_Comment_Form extends Pentalog_Blog_Block_Comment_Abstr
     protected $_formData = null;
 
     public function getActionForm() {
-        return Mage::getUrl('blog/commnet/commentPost', array('_secure' => false));
+        return Mage::getUrl('blog/comment/commentPost', array('_secure' => false));
     }
 
     public function getFormData() {
@@ -29,6 +29,7 @@ class Pentalog_Blog_Block_Comment_Form extends Pentalog_Blog_Block_Comment_Abstr
                 $this->_formData = new Varien_Object();
             }
         }
+
         return $this->_formData;
     }
 

@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Pentalog_Blog>
-            <version>0.1.1</version>
+            <version>0.1.2</version>
         </Pentalog_Blog>
     </modules>
     <frontend>

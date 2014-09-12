@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <blog_adminhtml_blog_index>
+        <reference name="content">
+            <block type="blog/adminhtml_blog" name="blog" />
+        </reference>
+    </blog_adminhtml_blog_index>
+    <blog_adminhtml_blog_edit>
+        <update handle="editor"/>
+    </blog_adminhtml_blog_edit>
+    <blog_adminhtml_blog_new>
+        <update handle="editor"/>
+    </blog_adminhtml_blog_new>
+    <!--Category page-->
+    <blog_adminhtml_category_index>
+        <reference name="content">
+            <block type="blog/adminhtml_category" name="category" />
+        </reference>
+    </blog_adminhtml_category_index>
+    <blog_adminhtml_category_edit>
+        <update handle="editor"/>
+    </blog_adminhtml_category_edit>
+    <blog_adminhtml_category_new>
+        <update handle="editor"/>
+    </blog_adminhtml_category_new>
+    <!--Type page-->
+    <blog_adminhtml_type_index>
+        <reference name="content">
+            <block type="blog/adminhtml_type" name="type" />
+        </reference>
+    </blog_adminhtml_type_index>
+    <!--Comment page-->
+    <blog_adminhtml_comment_index>
+        <reference name="content">
+            <block type="blog/adminhtml_comment" name="comment" />
+        </reference>
+    </blog_adminhtml_comment_index>
+    
+</layout>
