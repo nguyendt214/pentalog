@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <krewrite_adminhtml_krewrite_index>
+        <reference name="content">
+            <block type="krewrite/adminhtml_krewrite" name="krewrite" />
+        </reference>
+    </krewrite_adminhtml_krewrite_index>
+</layout>
