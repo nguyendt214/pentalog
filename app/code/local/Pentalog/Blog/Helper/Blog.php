@@ -17,7 +17,7 @@ class Pentalog_Blog_Helper_Blog extends Mage_Core_Helper_Abstract {
      */
     public function renderPage(Mage_Core_Controller_Front_Action $action, $blogId = null) {
         $blog = Mage::getSingleton('blog/blog');
-        //Set store id for filter blog avaible for current store or not
+        //Set store id for filter blog availble for current store or not
         $blog->setStoreId(Mage::app()->getStore()->getStoreId());
         $blog->load($blogId);
         //If not exists category

@@ -82,6 +82,23 @@ class Pentalog_Blog_Model_Mysql4_Category extends Mage_Core_Model_Mysql4_Abstrac
         return parent::_afterSave($object);
     }
 
+
+    /*
+     * After Delete Article
+     */
+
+    protected function _afterDelete(Mage_Core_Model_Abstract $object)
+    {
+        //remove data in Store View table
+        $condition = $this->_getReadAdapter()->quoteInto('category_id = ?', $object->getId());
+        $this->_getWriteAdapter()->delete($this->getTable('blog/categorytype'), $condition);
+        //remove data in category blog table
+        $condition = $this->_getReadAdapter()->quoteInto('category_id = ?', $object->getId());
+        $this->_getWriteAdapter()->delete($this->getTable('blog/blogcategory'), $condition);
+
+        return parent::_afterDelete($object);
+    }
+
     /*
      * Load data to display when edit article
      */

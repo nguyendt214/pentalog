@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 <config>
     <menu>
-        <xpentalog module="blog">
-            <title>xPentalog</title>
-            <sort_order>10</sort_order>               
+        <xpentalog module="all">
             <children>
                 <blog module="blog">
                     <title>Blog</title>
@@ -53,9 +51,7 @@
                             </config>
                         </children>
                     </system>
-                    <xpentalog translate="title" module="blog">
-                        <title>xPentalog</title>
-                        <sort_order>1000</sort_order>
+                    <xpentalog translate="title" module="all">
                         <children>
                             <blog translate="title">
                                 <title>Blog Module</title>

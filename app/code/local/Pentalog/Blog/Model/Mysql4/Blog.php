@@ -86,6 +86,22 @@ class Pentalog_Blog_Model_Mysql4_Blog extends Mage_Core_Model_Mysql4_Abstract {
     }
 
     /*
+     * After Delete Article
+     */
+
+    protected function _afterDelete(Mage_Core_Model_Abstract $object)
+    {
+        //remove data in Store View table
+        $condition = $this->_getReadAdapter()->quoteInto('blog_id = ?', $object->getId());
+        $this->_getWriteAdapter()->delete($this->getTable('blog/blogstore'), $condition);
+        //remove data in comment table
+        $condition = $this->_getReadAdapter()->quoteInto('blog_id = ?', $object->getId());
+        $this->_getWriteAdapter()->delete($this->getTable('blog/comment'), $condition);
+
+        return parent::_afterDelete($object);
+    }
+
+    /*
      * Load data to display when edit article
      */
 
@@ -116,7 +132,7 @@ class Pentalog_Blog_Model_Mysql4_Blog extends Mage_Core_Model_Mysql4_Abstract {
         return parent::_afterLoad($object);
     }
     /*
-     * Check this blog avaiable on current store view or not
+     * Check this blog available on current store view or not
      */
     protected function _getLoadSelect($field, $value, $object) {
         $select = parent::_getLoadSelect($field, $value, $object);
