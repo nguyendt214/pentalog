@@ -10,14 +10,13 @@
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>            
             <groups>
-                <blog_config> 
-                    <label>Blog Configuration</label>
+                <general>
+                    <label>General Configuration</label>
                     <class>separator-top</class>
-                    <tab>xpentalog</tab>
                     <sort_order>100</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>1</show_in_store>  
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <active>
                             <label>Enable/Disable</label>
@@ -28,17 +27,172 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </active>
+                        <blog_title>
+                            <label>Suffix Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 'Pentalog Blog'</comment>
+                        </blog_title>
                         <layout>
                             <label>Page Layout</label>
                             <frontend_type>select</frontend_type>
                             <source_model>blog/layouts</source_model>
-                            <sort_order>14</sort_order>
+                            <sort_order>2</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </layout>
                     </fields>
+                </general>
+                <blog_config> 
+                    <label>Blog Configuration</label>
+                    <class>separator-top</class>
+                    <sort_order>110</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>  
+                    <fields>
+                        <blog_list_image_width>
+                            <label>Image Height in listing page</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 150px</comment>
+                        </blog_list_image_width>
+                        <blog_list_image_height>
+                            <label>Image Height in listing page</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 150px</comment>
+                        </blog_list_image_height>
+                        <column_article>
+                            <label>Number article per row</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 4</comment>
+                        </column_article>
+                        <toolbar_default_direction>
+                            <label>Toolbar sort default</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 'DESC'</comment>
+                        </toolbar_default_direction>
+                        <toolbar_default_sort_by>
+                            <label>Toolbar sort by default</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: blog_id (blog_id, title, created_date)</comment>
+                        </toolbar_default_sort_by>
+                        <toolbar_show_per_page>
+                            <label>Toolbar show per page</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 4,8,12</comment>
+                        </toolbar_show_per_page>
+                        <blog_detail_image_width>
+                            <label>Image Width in detail page</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 300px</comment>
+                        </blog_detail_image_width>
+                        <blog_detail_image_height>
+                            <label>Image Height in detail page</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 300px</comment>
+                        </blog_detail_image_height>
+                        <default_article_image>
+                            <label>Default article Image</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 'xpentalog/blog/defaultImage.jpg'</comment>
+                        </default_article_image>
+                        <allow_not_login_write_comment>
+                            <label>Allow not loggin customer write comment</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allow_not_login_write_comment>
+                    </fields>
                 </blog_config>
+                <blog_category>
+                    <label>Blog Category Configuration</label>
+                    <class>separator-top</class>
+                    <sort_order>110</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <blog_category_list_image_width>
+                            <label>Image Height in listing page</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 150px</comment>
+                        </blog_category_list_image_width>
+                        <blog_category_list_image_height>
+                            <label>Image Height in listing page</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 150px</comment>
+                        </blog_category_list_image_height>
+                        <blog_category_view_image_width>
+                            <label>Image Width in detail page</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 100%</comment>
+                        </blog_category_view_image_width>
+                        <blog_category_view_image_height>
+                            <label>Image Height in detail page</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: 300px</comment>
+                        </blog_category_view_image_height>
+                    </fields>
+                </blog_category>
             </groups>
         </blog_section>
     </sections>

@@ -26,7 +26,7 @@ class Pentalog_Blog_Helper_Configs extends Mage_Core_Helper_Abstract {
                     'blog_id' => 'Newest',
                     'title' => 'Title',
                 ),
-                'toolbar_show_per_page' => array(2 => 2, 4 => 4, 6 => 6),
+                'toolbar_show_per_page' => array(4 => 4, 8 => 8, 12 => 12),
                 //Blog Detail config
                 'blog_detail_image_width' => '350px',
                 'blog_detail_image_height' => '350px',
@@ -40,8 +40,8 @@ class Pentalog_Blog_Helper_Configs extends Mage_Core_Helper_Abstract {
                 'blog_category_view_image_height' => '200px',
                 //Blog general
                 'blog_title' => 'Pentalog Blog',
-                'blog_active' => $this->getHelper()->getConfigValue('blog_section/blog_config/active', $store),
-                'blog_layout' => $this->getHelper()->getConfigValue('blog_section/blog_config/layout', $store),
+                'blog_active' => $this->getHelper()->getConfigValue('blog_section/general/active', $store),
+                'blog_layout' => $this->getHelper()->getConfigValue('blog_section/general/layout', $store),
             );
             //Convert configs to Object
             $config = new Varien_Object();
@@ -52,6 +52,13 @@ class Pentalog_Blog_Helper_Configs extends Mage_Core_Helper_Abstract {
 
     public function getHelper($type = 'all') {
         return Mage::helper($type);
+    }
+    /*
+     * Return configuration data
+     */
+    public function getConfig($path){
+        $storeId = Mage::app()->getStore()->getStoreId();
+        return $this->getHelper()->getConfigValue($path, $store);
     }
 
 }
