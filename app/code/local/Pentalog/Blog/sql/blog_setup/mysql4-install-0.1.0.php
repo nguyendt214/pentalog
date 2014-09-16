@@ -258,6 +258,8 @@ $table = $installer->getConnection()
     ), 'title')
     ->addColumn('style_name', Varien_Db_Ddl_Table::TYPE_VARCHAR, null, array(
     ), 'style_name')
+    ->addColumn('template_path', Varien_Db_Ddl_Table::TYPE_VARCHAR, null, array(
+    ), 'template_path')
     ->addColumn('data_json', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
     ), 'data_json')
 ;

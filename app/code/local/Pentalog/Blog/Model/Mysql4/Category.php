@@ -60,17 +60,6 @@ class Pentalog_Blog_Model_Mysql4_Category extends Kevin_All_Model_Mysql4_Abstrac
                 $this->_getWriteAdapter()->insert($this->getTable('blog/categorystore'), $storeArray);
             }
         }
-
-        //Save category type
-//        $condition = $this->_getWriteAdapter()->quoteInto('category_id = ?', $object->getId());
-//        $this->_getWriteAdapter()->delete($this->getTable('blog/categorytype'), $condition);
-//        if (sizeof((array)$object->getData('type')) > 0) {
-//            $storeArray = array();
-//            $storeArray['category_id'] = $object->getId();
-//            $storeArray['type_id'] = $object->getData('type');
-//            $this->_getWriteAdapter()->insert($this->getTable('blog/categorytype'), $storeArray);
-//        }
-
         //Save article and URL rewrite
         $condition = $this->_getWriteAdapter()->quoteInto("`type` = ?", 'blog_category');
         $condition .= $this->_getWriteAdapter()->quoteInto(" AND type_id = ? ", $object->getId());
@@ -94,21 +83,21 @@ class Pentalog_Blog_Model_Mysql4_Category extends Kevin_All_Model_Mysql4_Abstrac
         $rewrite->save();
         return parent::_afterSave($object);
     }
-
-
     /*
      * After Delete Article
      */
-
     protected function _afterDelete(Mage_Core_Model_Abstract $object)
     {
         //remove data in Store View table
         $condition = $this->_getReadAdapter()->quoteInto('category_id = ?', $object->getId());
-        $this->_getWriteAdapter()->delete($this->getTable('blog/categorytype'), $condition);
+        $this->_getWriteAdapter()->delete($this->getTable('blog/categorystore'), $condition);
         //remove data in category blog table
         $condition = $this->_getReadAdapter()->quoteInto('category_id = ?', $object->getId());
         $this->_getWriteAdapter()->delete($this->getTable('blog/blogcategory'), $condition);
-
+        //Delete data in URL rewrite table
+        $condition = $this->_getReadAdapter()->quoteInto('type_id = ?', $object->getId());
+        $condition = $this->_getReadAdapter()->quoteInto(' AND `type` = ?', 'blog_category');
+        $this->_getWriteAdapter()->delete($this->getTable('krewrite/krewrite'), $condition);
         return parent::_afterDelete($object);
     }
 
@@ -128,14 +117,6 @@ class Pentalog_Blog_Model_Mysql4_Category extends Kevin_All_Model_Mysql4_Abstrac
                 $storesArray[] = $row['store_id'];
             }
             $object->setData('store_id', $storesArray);
-        }
-        //Load category type
-        $select = $this->_getReadAdapter()->select()
-            ->from($this->getTable('blog/categorytype'))
-            ->where('category_id = ?', $object->getId());
-        if ($data = $this->_getReadAdapter()->fetchRow($select)) {
-            $categories = array();
-            $object->setData('type', $data['type_id']);
         }
         return parent::_afterLoad($object);
     }

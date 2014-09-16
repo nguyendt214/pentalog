@@ -106,6 +106,10 @@ class Pentalog_Blog_Model_Mysql4_Blog extends Kevin_All_Model_Mysql4_Abstract {
         //remove data in comment table
         $condition = $this->_getReadAdapter()->quoteInto('blog_id = ?', $object->getId());
         $this->_getWriteAdapter()->delete($this->getTable('blog/comment'), $condition);
+        //delete data on table kevin rewrite
+        $condition = $this->_getReadAdapter()->quoteInto('type_id = ?', $object->getId());
+        $condition = $this->_getReadAdapter()->quoteInto(' AND `type` = ?', 'blog_article');
+        $this->_getWriteAdapter()->delete($this->getTable('krewrite/krewrite'), $condition);
 
         return parent::_afterDelete($object);
     }
