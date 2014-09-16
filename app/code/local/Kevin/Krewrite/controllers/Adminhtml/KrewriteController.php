@@ -50,7 +50,7 @@ class Kevin_Krewrite_Adminhtml_KrewriteController extends Mage_Adminhtml_Control
 
             $this->renderLayout();
         } else {
-            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('kreqrite')->__('Item does not exist'));
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('krewrite')->__('Item does not exist'));
             $this->_redirect('*/*/');
         }
     }

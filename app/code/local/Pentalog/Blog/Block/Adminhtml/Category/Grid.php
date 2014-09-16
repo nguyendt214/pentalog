@@ -37,6 +37,12 @@ class Pentalog_Blog_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_W
             'index' => 'identifier',
         ));
 
+        $this->addColumn('url', array(
+            'header' => Mage::helper('blog')->__('URL'),
+            'align' => 'left',
+            'index' => 'url',
+        ));
+
         $this->addColumn(
                 'created_time', array(
             'header' => Mage::helper('blog')->__('Created at'),

@@ -1,4 +1,7 @@
-<?php $category = $this->getCategory(); ?>
+<?php
+$category = $this->getCategory();
+$configs = Mage::helper('blog/configs')->getAllConfigs();
+?>
 <div class="blog-category type-display-<?php echo $category->getType(); ?>">
     <h1 class="title">
         <?php echo $category->getName(); ?>
@@ -9,7 +12,7 @@
     if (strlen($categoryImg)):
         ?>
         <div class="image">
-            <img src="<?php echo Mage::helper('all')->imageSrc($categoryImg); ?>" title="<?php echo $category->getName(); ?>"/>
+            <img src="<?php echo Mage::helper('all')->imageSrc($categoryImg); ?>" title="<?php echo $category->getName(); ?>" width="<?php echo $configs->getBlogCategoryViewImageWidth(); ?>" height="<?php echo $configs->getBlogCategoryViewImageHeight(); ?>"/>
         </div>
         <div class="description">
             <?php echo nl2br($category->getDescription()); ?>

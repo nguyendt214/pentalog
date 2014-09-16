@@ -1,6 +1,6 @@
 <?php
 $articles = $this->getArticles();
-$_heler = Mage::helper('all');
+$_helper = Mage::helper('all');
 $configs = Mage::helper('blog/configs')->getAllConfigs();
 ?>
 <?php $_collectionSize = sizeof($articles) ?>
@@ -18,9 +18,9 @@ $configs = Mage::helper('blog/configs')->getAllConfigs();
                 <li class="item<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
                     <a href="<?php echo Mage::helper('blog/blog')->getBlogUrl($_article); ?>" title="<?php echo $_article->getTitle(); ?>" class="article-image">
                         <?php if (strlen($_article->getImage())): ?>
-                            <img src="<?php echo $_heler->imageSrc($_article->getImage()); ?>" width="<?php echo $configs->getBlogListImageWidth(); ?>" height="<?php echo $configs->getBlogListImageHeight(); ?>" alt="" />
+                            <img src="<?php echo $_helper->imageSrc($_article->getImage()); ?>" width="<?php echo $configs->getBlogListImageWidth(); ?>" height="<?php echo $configs->getBlogListImageHeight(); ?>" alt="" />
                         <?php else: ?>
-                            <img src="<?php echo $_heler->imageSrc($configs->getDefaultArticleImage()); ?>" width="<?php echo $configs->getBlogListImageWidth(); ?>" height="<?php echo $configs->getBlogListImageHeight(); ?>" alt="" />
+                            <img src="<?php echo $_helper->imageSrc($configs->getDefaultArticleImage()); ?>" width="<?php echo $configs->getBlogListImageWidth(); ?>" height="<?php echo $configs->getBlogListImageHeight(); ?>" alt="" />
                         <?php endif; ?>
                     </a>
                     <div class="clear"></div>

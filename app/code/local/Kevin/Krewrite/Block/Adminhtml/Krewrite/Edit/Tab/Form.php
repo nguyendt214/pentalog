@@ -9,17 +9,20 @@ class Kevin_Krewrite_Block_Adminhtml_Krewrite_Edit_Tab_Form extends Mage_Adminht
         $this->setForm($form);
         $fieldset = $form->addFieldset('krewrite_form', array('legend' => Mage::helper('krewrite')->__('URL Rewrite  information')));
 
+        $identifierUniqueText = Mage::helper('krewrite')->__("This value need unique");
+
         $fieldset->addField('request_path', 'text', array(
             'label' => Mage::helper('krewrite')->__('Request Path'),
             'class' => 'required-entry',
             'required' => true,
             'name' => 'request_path',
+            'after_element_html' => '<span class="hint">' . $identifierUniqueText . '</span>'
         ));
         $fieldset->addField('target_path', 'text', array(
             'label' => Mage::helper('krewrite')->__('Target Path'),
             'required' => true,
             'name' => 'target_path',
-//            'after_element_html' => '<small>Input absolute link when link to external site</small>'
+            'after_element_html' => '<span class="hint">' . $identifierUniqueText . '</span>'
         ));
         $fieldset->addField('options', 'select', array(
             'label' => Mage::helper('krewrite')->__('Redirect'),

@@ -101,4 +101,36 @@ class Kevin_Krewrite_Model_Mysql4_Krewrite extends Kevin_All_Model_Mysql4_Abstra
         }
         return $select;
     }
+
+    /*
+     * Check URL is unique or not for Article and Category - Blog
+     */
+    public function isUniqueUrl(Mage_Core_Model_Abstract $object, $type = '')
+    {
+        $select = $this->_getWriteAdapter()->select()
+            ->from($this->getTable('krewrite/krewrite'))
+            ->where("`request_path` = ?", $object->getData('url'));
+        //If update Article or Blog Category
+        if ($object->getId()) {
+            //Get krewrite_id
+            $select->where("`type_id` = ?", $object->getId());
+            if ($type == 'blog_article') {
+                $select->where("`type` == 'blog_article'");
+            } elseif ($type == 'blog_category') {
+                $select->where("`type` == 'blog_category'");
+            }
+            $krewriteId = $this->_getReadAdapter()->fetchOne($select);
+            $select = $this->_getWriteAdapter()->select()
+                ->from($this->getTable('krewrite/krewrite'))
+                ->where("`request_path` = ?", $object->getData('url'));
+            if ($krewriteId) {
+                $select->where("`krewrite_id` <> ?", $krewriteId);
+            }
+        }
+
+        if ($this->_getWriteAdapter()->fetchRow($select)) {
+            return false;
+        }
+        return true;
+    }
 }

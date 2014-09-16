@@ -36,6 +36,11 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Grid extends Mage_Adminhtml_Block_Widge
             'align' => 'left',
             'index' => 'identifier',
         ));
+        $this->addColumn('url', array(
+            'header' => Mage::helper('blog')->__('URL'),
+            'align' => 'left',
+            'index' => 'url',
+        ));
 
         $this->addColumn(
                 'author', array(

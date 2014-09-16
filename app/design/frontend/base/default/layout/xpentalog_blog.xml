@@ -13,6 +13,11 @@
         </reference>
     </blog_index_index>
     <blog_category_list>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>pentalog/blog/styles.css</stylesheet>
+            </action>
+        </reference>
         <reference name="content">
             <block type="blog/category_list" name="category.list" template="pentalog/blog/category/list.phtml" />
         </reference>

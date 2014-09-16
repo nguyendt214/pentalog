@@ -92,7 +92,6 @@ class Pentalog_Blog_Adminhtml_BlogController extends Mage_Adminhtml_Controller_a
             } else {
                 unset($data['image']);
             }
-
             $model = Mage::getModel('blog/blog');
             $model->setData($data)
                     ->setId($this->getRequest()->getParam('id'));

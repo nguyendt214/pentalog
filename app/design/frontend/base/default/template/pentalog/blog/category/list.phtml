@@ -1,6 +1,32 @@
 <?php
 $categories = $this->getCategories();
-print "<pre>";
-print_r($categories->getData());
-die();
+$_helper = Mage::helper('blog');
+$configs = Mage::helper('blog/configs')->getAllConfigs();
 ?>
+<?php if (sizeof($categories)): ?>
+    <div class="blog-category">
+        <ul>
+            <?php foreach ($categories as $category): ?>
+                <li>
+                    <a href="<?php echo Mage::helper('blog/category')->getCategoryUrl($category); ?>">
+                        <?php if (strlen($category->getImage())): ?>
+                            <img src="<?php echo Mage::helper('all')->imageSrc($category->getImage()); ?>"
+                                 width="<?php echo $configs->getBlogCategoryListImageWidth(); ?>"
+                                 height="<?php echo $configs->getBlogCategoryListImageHeight(); ?>" alt=""/>
+                        <?php else: ?>
+                            <img src="<?php echo Mage::helper('all')->imageSrc($configs->getDefaultArticleImage()); ?>"
+                                 width="<?php echo $configs->getBlogCategoryListImageWidth(); ?>"
+                                 height="<?php echo $configs->getBlogCategoryListImageHeight(); ?>" alt=""/>
+                        <?php endif; ?>
+                    </a>
+                    <a href="<?php echo Mage::helper('blog/category')->getCategoryUrl($category); ?>"
+                       title="<?php echo $category->getName(); ?>" class="link">
+                        <h3><?php echo $category->getName(); ?></h3>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php else: ?>
+    <p><?php echo $_helper->__("Doesn't have any blog category"); ?></p>
+<?php endif; ?>

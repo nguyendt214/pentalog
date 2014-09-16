@@ -4,7 +4,7 @@
  * @author: Kevin (ndotrong@pentalog.fr)
  */
 
-class Pentalog_Blog_Model_Mysql4_Blog extends Mage_Core_Model_Mysql4_Abstract {
+class Pentalog_Blog_Model_Mysql4_Blog extends Kevin_All_Model_Mysql4_Abstract {
 
     public function _construct() {
         $this->_init('blog/blog', 'blog_id');
@@ -15,35 +15,22 @@ class Pentalog_Blog_Model_Mysql4_Blog extends Mage_Core_Model_Mysql4_Abstract {
      */
     protected function _beforeSave(Mage_Core_Model_Abstract $object) {
 
+        $message = '';
         //Check Idendifier is unique
         if(!$this->isUniqueField($object, $this->getTable('blog/blog'), 'identifier', 'blog_id')){
             $message = Mage::helper('blog')->__("Article Identifier already exist.");
-            Mage::throwException($message);
         }
         
         if(!$this->isUniqueField($object, $this->getTable('blog/blog'), 'url', 'blog_id')){
             $message = Mage::helper('blog')->__("Article URL already exist.");
+        }
+
+        if(!Mage::getResourceModel('krewrite/krewrite')->isUniqueUrl($object)){
+            $message = Mage::helper('blog')->__("Article Rewrite URL already exist.");
+        }
+        if($message)
             Mage::throwException($message);
-        }
         return $this;
-    }
-
-    /*
-     * Check field unique or not
-     */
-
-    public function isUniqueField(Mage_Core_Model_Abstract $object, $tableName, $fieldUnique, $fieldKey) {
-        $select = $this->_getWriteAdapter()->select()
-                ->from($tableName)
-                ->where("`{$fieldUnique}` = ?", $object->getData($fieldUnique))
-        ;
-        if ($object->getId()) {
-            $select->where("`{$fieldKey}` <> ?", $object->getId());
-        }
-        if ($this->_getWriteAdapter()->fetchRow($select)) {
-            return false;
-        }
-        return true;
     }
 
     /*
@@ -81,6 +68,28 @@ class Pentalog_Blog_Model_Mysql4_Blog extends Mage_Core_Model_Mysql4_Abstract {
                 $this->_getWriteAdapter()->insert($this->getTable('blog/blogcategory'), $storeArray);
             }
         }
+
+        //Save article and URL rewrite
+        $condition = $this->_getWriteAdapter()->quoteInto("`type` = ?", 'blog_article');
+        $condition .= $this->_getWriteAdapter()->quoteInto(" AND type_id = ? ", $object->getId());
+        $this->_getWriteAdapter()->delete($this->getTable('krewrite/krewrite'), $condition);
+
+        $articleRewrite = array(
+            'request_path' => $object->getUrl(),
+            'target_path' => 'blog/article/view/id/'.$object->getId(),
+            'store_id' => $object->getStoreId(),
+            'options' => '',
+            'is_active' => 1,
+            'description' => "Rewrite URL for Blog Article ID: ".$object->getId(),
+            'type' => 'blog_article',
+            'type_id' => $object->getId(),
+            'is_external_link' => 2,
+            'is_secure' => 2,
+
+        );
+        $rewrite = Mage::getModel('krewrite/krewrite');
+        $rewrite->addData($articleRewrite);
+        $rewrite->save();
 
         return parent::_afterSave($object);
     }

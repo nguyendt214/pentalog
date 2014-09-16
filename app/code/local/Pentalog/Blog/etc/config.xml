@@ -62,32 +62,26 @@
                 <class>Pentalog_Blog_Model_Mysql4</class>
                 <entities>
                     <blog>
-                        <table>p5_blog</table>
+                        <table>p5_xblog_blog</table>
                     </blog>
                     <category>
-                        <table>p5_category</table>
+                        <table>p5_xblog_category</table>
                     </category>
                     <blogcategory>
-                        <table>p5_blog_category</table>
+                        <table>p5_xblog_blog_category</table>
                     </blogcategory>
                     <blogstore>
-                        <table>p5_blog_store</table>
+                        <table>p5_xblog_blog_store</table>
                     </blogstore>
                     <categorystore>
-                        <table>p5_category_store</table>
+                        <table>p5_xblog_category_store</table>
                     </categorystore>
                     <comment>
-                        <table>p5_comment</table>
+                        <table>p5_xblog_comment</table>
                     </comment>
-                    <blogcomment>
-                        <table>p5_blog_comment</table>
-                    </blogcomment>
                     <type>
-                        <table>p5_type</table>
+                        <table>p5_xblog_type</table>
                     </type>
-                    <categorytype>
-                        <table>p5_category_type</table>
-                    </categorytype>
                 </entities>
             </blog_mysql4>
         </models>

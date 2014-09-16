@@ -9,7 +9,7 @@ $_helper = Mage::helper('blog');
         <div class="left">
             <?php $image = $article->getImage(); ?>
             <?php if (strlen($image)): ?>
-                <img src="<?php echo Mage::helper('all')->imageSrc($_article->getImage()); ?>" width="<?php echo $configs->getBlogDetailImageWidth(); ?>" height="<?php echo $configs->getBlogDetailImageHeight(); ?>" title="<?php echo $article->getTitle(); ?>"/>
+                <img src="<?php echo Mage::helper('all')->imageSrc($article->getImage()); ?>" width="<?php echo $configs->getBlogDetailImageWidth(); ?>" height="<?php echo $configs->getBlogDetailImageHeight(); ?>" title="<?php echo $article->getTitle(); ?>"/>
             <?php else: ?>
                 <img src="<?php echo Mage::helper('all')->imageSrc($configs->getDefaultArticleImage()); ?>" width="<?php echo $configs->getBlogDetailImageWidth(); ?>" height="<?php echo $configs->getBlogDetailImageHeight(); ?>" title="<?php echo $article->getTitle(); ?>"/>
             <?php endif; ?>

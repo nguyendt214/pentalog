@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Kevin_Krewrite>
-            <version>0.1.1</version>
+            <version>0.1.0</version>
         </Kevin_Krewrite>
     </modules>
     <frontend>

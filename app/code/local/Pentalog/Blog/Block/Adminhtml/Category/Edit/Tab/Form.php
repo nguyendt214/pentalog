@@ -71,9 +71,9 @@ class Pentalog_Blog_Block_Adminhtml_Category_Edit_Tab_Form extends Mage_Adminhtm
                     'value' => $type->getId()
                 );
             }
-            $fieldset->addField('type', 'select', array(
+            $fieldset->addField('type_id', 'select', array(
                 'label' => Mage::helper('blog')->__('Display Type'),
-                'name' => 'type',
+                'name' => 'type_id',
                 'values' => $typeList,
             ));
         }
