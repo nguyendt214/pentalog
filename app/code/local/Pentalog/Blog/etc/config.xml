@@ -116,4 +116,31 @@
             </blog>
         </helpers>
     </global>
+    <default>
+        <blog_section>
+            <general>
+                <active>1</active>
+                <blog_title>Pentalog Blog</blog_title>
+                <layout>page/1column.phtml</layout>
+            </general>
+            <blog_config>
+                <blog_list_image_width>150</blog_list_image_width>
+                <blog_list_image_height>150</blog_list_image_height>
+                <column_article>4</column_article>
+                <toolbar_default_direction>desc</toolbar_default_direction>
+                <toolbar_default_sort_by>blog_id</toolbar_default_sort_by>
+                <toolbar_show_per_page>4,8,12</toolbar_show_per_page>
+                <blog_detail_image_width>300</blog_detail_image_width>
+                <blog_detail_image_height>300</blog_detail_image_height>
+                <default_article_image>xpentalog/blog/defaultImage.jpg</default_article_image>
+                <allow_not_login_write_comment>1</allow_not_login_write_comment>
+            </blog_config>
+            <blog_category>
+                <blog_category_list_image_width>150</blog_category_list_image_width>
+                <blog_category_list_image_height>150</blog_category_list_image_height>
+                <blog_category_view_image_width>100%</blog_category_view_image_width>
+                <blog_category_view_image_height>300</blog_category_view_image_height>
+            </blog_category>
+        </blog_section>
+    </default>
 </config>
