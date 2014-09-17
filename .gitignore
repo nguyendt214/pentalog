@@ -2,7 +2,7 @@
 var/
 downloader/
 app/etc/local.xml
-nbproject/private/
+nbproject/
 media/
 nbproject/
 .idea/
