@@ -14,6 +14,7 @@ class Pentalog_Blog_Block_Comment_List extends Pentalog_Blog_Block_Comment_Abstr
             $comments = Mage::getModel('blog/comment')->getCollection()
                 ->addFieldToFilter('blog_id', $article->getId())
                 ->addFieldToFilter('status', 1)
+                ->setOrder('comment_id', 'DESC')
             ;
             $this->_commentList = $comments;
         }

@@ -17,10 +17,15 @@ class Pentalog_Blog_CommentController extends Mage_Core_Controller_Front_Action
                 $comment->setData($data);
                 $comment->save();
                 Mage::getSingleton('core/session')->addSuccess(Mage::helper('blog')->__('Comment was sent.'));
+                Mage::dispatchEvent('pentalog_blog_comment_save_after',
+                    array(
+                        'comment' => $comment
+                    )
+                );
             }
         } catch (Exception $e) {
             Mage::log("Add comment error: " . $e->getMessage());
-            Mage::getSingleton('core/session')->addError(Mage::helper('blog')->__('System error: '.$e->getMessage()));
+            Mage::getSingleton('core/session')->addError(Mage::helper('blog')->__('System error: ' . $e->getMessage()));
         }
         $this->_redirect('blog/article/view', array('id' => $this->getRequest()->getPost('blog_id')));
     }

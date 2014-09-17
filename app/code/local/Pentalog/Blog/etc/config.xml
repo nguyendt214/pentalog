@@ -124,6 +124,17 @@
                 </blog_section_comment_comment_email_template>
             </email>
         </template>
+        <events>
+            <pentalog_blog_comment_save_after>
+                <observers>
+                    <custom_event_comment_save_after>
+                        <type>singleton</type>
+                        <class>blog/observer</class>
+                        <method>afterSaveComment</method>
+                    </custom_event_comment_save_after>
+                </observers>
+            </pentalog_blog_comment_save_after>
+        </events>
     </global>
     <default>
         <blog_section>

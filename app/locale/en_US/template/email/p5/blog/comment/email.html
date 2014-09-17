@@ -1,10 +1,12 @@
 <!--@subject Blog New Comment@-->
 <!--@vars
-{"var customer.user_name":"Sender Name",
-"var customer.user_email":"Sender Email",
-"var customer.user_telephone":"Sender Telephone",
-"var customer.content":"content",
-"var customer.comment_id":"comment_id"}
+{"var comment.user_name":"Sender Name",
+"var comment.user_email":"Sender Email",
+"var comment.user_telephone":"Sender Telephone",
+"var comment.content":"content",
+"var comment.article_id":"blog_id",
+"var comment.status":"status",
+"var comment.comment_id":"comment_id"}
 @-->
 <body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
 <div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
@@ -16,22 +18,28 @@
                     <tr>
                         <td>
                             <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;"><strong>Name:</strong> {{var
-                                customer.user_name}}</p>
+                                comment.user_name}}</p>
 
                             <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;"><strong>E-mail:</strong>
-                                {{var customer.user_email}}</p>
+                                {{var comment.user_email}}</p>
 
                             <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;"><strong>Telephone:</strong>
-                                {{var customer.user_telephone}}</p>
+                                {{var comment.user_telephone}}</p>
 
                             <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;"><strong>Comment
-                                Title:</strong> {{var customer.title}}</p>
+                                Title:</strong> {{var comment.title}}</p>
 
                             <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;"><strong>Comment
-                                Content:</strong> {{var customer.content}}</p>
+                                Content:</strong> {{var comment.content}}</p>
+
+                            <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;"><strong>Article Id:</strong>
+                                {{var comment.blog_id}}</p>
 
                             <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;"><strong>Comment Id:</strong>
-                                {{var customer.comment_id}}</p>
+                                {{var comment.comment_id}}</p>
+
+                            <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;"><strong>Comment status:</strong>
+                                {{var comment.status}}</p>
                         </td>
                     </tr>
                 </table>
