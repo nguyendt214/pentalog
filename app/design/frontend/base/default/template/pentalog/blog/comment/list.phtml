@@ -1,6 +1,7 @@
 <?php $comments = $this->getCommentList();?>
 <?php $_helper = Mage::helper('blog');?>
 <?php if(sizeof($comments)):?>
+    <?php echo $this->getToolbarHtml(); ?>
     <div class="comment-list">
         <?php foreach($comments as $comment):?>
             <div class="item">
