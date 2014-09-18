@@ -144,7 +144,8 @@ class Pentalog_Blog_Block_Adminhtml_Blog_Edit_Tab_Form extends Mage_Adminhtml_Bl
             Mage::getSingleton('adminhtml/session')->setBlogData(null);
         } elseif (Mage::registry('blog_data')) {
             $data = Mage::registry('blog_data');
-            if (empty($data->getAuthor())) {
+            $author = $data->getAuthor();
+            if (empty($author)) {
                 $data->setAuthor(Mage::getSingleton('admin/session')->getUser()->getName());
             }
             $form->setValues($data);
