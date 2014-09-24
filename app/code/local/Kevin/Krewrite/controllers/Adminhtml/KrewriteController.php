@@ -7,7 +7,7 @@
  * @author     ndotrong@pentalog.fr
  * @purpose :  add new function allow admin add url rewrite
  */
-class Kevin_Krewrite_Adminhtml_KrewriteController extends Mage_Adminhtml_Controller_action
+class Kevin_Krewrite_Adminhtml_KrewriteController extends Mage_Adminhtml_Controller_Action
 {
     protected function _initAction()
     {

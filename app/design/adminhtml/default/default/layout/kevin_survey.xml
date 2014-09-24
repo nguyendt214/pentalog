@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <survey_adminhtml_survey_index>
+        <reference name="content">
+            <block type="survey/adminhtml_survey" name="survey" />
+        </reference>
+    </survey_adminhtml_survey_index>
+</layout>

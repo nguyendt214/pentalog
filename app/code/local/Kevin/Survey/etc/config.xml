@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Kevin_Survey>
+            <version>0.2.0</version>
+        </Kevin_Survey>
+    </modules>
+    <frontend>
+        <routers>
+            <survey>
+                <use>standard</use>
+                <args>
+                    <module>Kevin_Survey</module>
+                    <frontName>survey</frontName>
+                </args>
+            </survey>
+        </routers>
+    </frontend>
+    <admin>
+        <routers>
+            <survey>
+                <use>admin</use>
+                <args>
+                    <module>Kevin_Survey</module>
+                    <frontName>survey</frontName>
+                </args>
+            </survey>
+        </routers>
+    </admin>
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <kevin_survey translate="title" module="survey">
+                                            <title>Kevin Survey Extension</title>
+                                            <sort_order>10</sort_order>
+                                        </kevin_survey>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                        <customer translate="title" module="customer">
+                            <children>
+                                <survey module="survey">
+                                    <title>Customer Survey</title>
+                                    <sort_order>10</sort_order>
+                                    <children>
+                                        <survey>
+                                            <title>Survey Schedule</title>
+                                            <sort_order>0</sort_order>
+                                        </survey>
+                                        <list>
+                                            <title>Survey List</title>
+                                            <sort_order>2</sort_order>
+                                        </list>
+                                    </children>
+                                </survey>
+                            </children>
+                        </customer>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <survey>
+                    <file>kevin_survey.xml</file>
+                </survey>
+            </updates>
+        </layout>
+        <menu>
+            <customer module="all">
+                <children>
+                    <survey module="survey">
+                        <title>Customer Survey</title>
+                        <sort_order>10</sort_order>
+                        <children>
+                            <survey>
+                                <title>Survey Schedule</title>
+                                <sort_order>1</sort_order>
+                                <action>survey/adminhtml_survey</action>
+                            </survey>
+                            <list>
+                                <title>Survey List</title>
+                                <sort_order>2</sort_order>
+                                <action>survey/adminhtml_list</action>
+                            </list>
+                        </children>
+                    </survey>
+                </children>
+            </customer>
+        </menu>
+    </adminhtml>
+    <global>
+        <models>
+            <survey>
+                <class>Kevin_Survey_Model</class>
+                <resourceModel>survey_mysql4</resourceModel>
+            </survey>
+            <survey_mysql4>
+                <class>Kevin_Survey_Model_Mysql4</class>
+                <entities>
+                    <survey>
+                        <table>kevin_survey</table>
+                    </survey>
+                    <list>
+                        <table>kevin_survey_list</table>
+                    </list>
+                </entities>
+            </survey_mysql4>
+        </models>
+        <resources>
+            <survey_setup>
+                <setup>
+                    <module>Kevin_survey</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </survey_setup>
+            <survey_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </survey_write>
+            <survey_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </survey_read>
+        </resources>
+        <blocks>
+            <survey>
+                <class>Kevin_Survey_Block</class>
+            </survey>
+        </blocks>
+        <helpers>
+            <survey>
+                <class>Kevin_Survey_Helper</class>
+            </survey>
+        </helpers>
+        <template>
+            <email>
+                <kevin_survey_survey_email_template translate="label" module="blog">
+                    <label>Survey Email</label>
+                    <file>kevin/survey/email.customer.html</file>
+                    <type>html</type>
+                </kevin_survey_survey_email_template>
+                <kevin_survey_survey_email_template_admin translate="label" module="blog">
+                    <label>Survey Email</label>
+                    <file>kevin/survey/email.administrator.html</file>
+                    <type>html</type>
+                </kevin_survey_survey_email_template_admin>
+            </email>
+        </template>
+    </global>
+    <default>
+        <kevin_survey>
+            <survey>
+                <days>21</days>
+                <test_email><![CDATA[nguyendt214@gmail.com]]></test_email>
+                <sender_email_identity>general</sender_email_identity>
+                <email_template>kevin_survey_survey_email_template</email_template>
+                <email_template>kevin_survey_survey_email_template_admin</email_template>
+            </survey>
+        </kevin_survey>
+    </default>
+</config>

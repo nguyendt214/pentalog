@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Kevin_Survey>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Kevin_Survey>
+    </modules>
+</config> 
