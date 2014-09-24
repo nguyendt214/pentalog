@@ -32,6 +32,7 @@ class Kevin_Survey_Block_Adminhtml_Survey_Grid extends Mage_Adminhtml_Block_Widg
         $this->addColumn('order_increment', array(
             'header' => Mage::helper('survey')->__('Order #'),
             'index' => 'order_increment',
+            'width' => '150px',
         ));
 
         $this->addColumn(
@@ -39,7 +40,7 @@ class Kevin_Survey_Block_Adminhtml_Survey_Grid extends Mage_Adminhtml_Block_Widg
                 'header' => Mage::helper('blog')->__('Purchased Date'),
                 'index' => 'purchased_date',
                 'type' => 'datetime',
-                'width' => '120px',
+                'width' => '150px',
                 'gmtoffset' => true,
                 'default' => ' -- '
             )
@@ -49,7 +50,7 @@ class Kevin_Survey_Block_Adminhtml_Survey_Grid extends Mage_Adminhtml_Block_Widg
             'send_survey_date', array(
                 'header' => Mage::helper('blog')->__('Sent Survey date'),
                 'index' => 'send_survey_date',
-                'width' => '120px',
+                'width' => '200px',
                 'type' => 'datetime',
                 'gmtoffset' => true,
                 'default' => ' -- '
@@ -67,14 +68,14 @@ class Kevin_Survey_Block_Adminhtml_Survey_Grid extends Mage_Adminhtml_Block_Widg
 
         $this->addColumn('action', array(
             'header' => Mage::helper('survey')->__('Action'),
-            'width' => '100',
+            'width' => '200px',
             'type' => 'action',
             'getter' => 'getId',
             'actions' => array(
                 array(
-                    'caption' => Mage::helper('survey')->__('Edit'),
-                    'url' => array('base' => '*/*/edit'),
-                    'field' => 'id'
+                    'caption' => Mage::helper('survey')->__('Send Preview Email To Admin'),
+                    'url' => array('base' => '*/*/sendEmailPreview'),
+                    'field' => 'id',
                 )
             ),
             'filter' => false,
@@ -90,7 +91,7 @@ class Kevin_Survey_Block_Adminhtml_Survey_Grid extends Mage_Adminhtml_Block_Widg
     }
 
     public function getRowUrl($row) {
-        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+        return null;
     }
 
 }
