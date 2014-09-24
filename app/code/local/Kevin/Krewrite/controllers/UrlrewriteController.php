@@ -5,17 +5,15 @@
  * @category   Mage
  * @package    Kevin Rewrite URL
  * @author     ndotrong@pentalog.fr
- * @purpose :  add new function allow admin delete url reqrite 
+ * @purpose :  add new function allow admin delete url rewrite
  */
-include_once 'Mage/Adminhtml/controllers/UrlrewriteController.php';
+include_once 'Mage' .DS. 'Adminhtml' .DS. 'controllers' .DS. 'UrlrewriteController.php';
 
 class Kevin_Krewrite_UrlrewriteController extends Mage_Adminhtml_UrlrewriteController {
-
     /*
-     * 
+     *
      * Mass action Delete
      */
-
     public function massDeleteAction() {
         $this->_initRegistry();
         $urlIds = $this->getRequest()->getParam('kevin_url');

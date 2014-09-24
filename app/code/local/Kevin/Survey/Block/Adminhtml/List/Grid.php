@@ -1,17 +1,15 @@
 <?php
-
-class Kevin_Survey_Block_Adminhtml_Survey_Grid extends Mage_Adminhtml_Block_Widget_Grid {
-
+class Kevin_Survey_Block_Adminhtml_List_Grid extends Mage_Adminhtml_Block_Widget_Grid {
     public function __construct() {
         parent::__construct();
-        $this->setId('kevinSurveyGrid');
-        $this->setDefaultSort('survey_id');
+        $this->setId('kevinSurveyListGrid');
+        $this->setDefaultSort('survey_comment_id');
         $this->setDefaultDir('DESC');
-        $this->setSaveParametersInSession(true);
+        $this->setSaveParametersInSession(false);
     }
 
     protected function _prepareCollection() {
-        $collection = Mage::getModel('survey/survey')->getCollection();
+        $collection = Mage::getModel('survey/list')->getCollection();
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -22,47 +20,16 @@ class Kevin_Survey_Block_Adminhtml_Survey_Grid extends Mage_Adminhtml_Block_Widg
     }
 
     protected function _prepareColumns() {
-        $this->addColumn('survey_id', array(
+        $this->addColumn('survey_comment_id', array(
             'header' => Mage::helper('survey')->__('ID'),
             'align' => 'right',
             'width' => '50px',
-            'index' => 'survey_id',
+            'index' => 'survey_comment_id',
         ));
 
         $this->addColumn('order_increment', array(
             'header' => Mage::helper('survey')->__('Order #'),
             'index' => 'order_increment',
-        ));
-
-        $this->addColumn(
-            'purchased_date', array(
-                'header' => Mage::helper('blog')->__('Purchased Date'),
-                'index' => 'purchased_date',
-                'type' => 'datetime',
-                'width' => '120px',
-                'gmtoffset' => true,
-                'default' => ' -- '
-            )
-        );
-
-        $this->addColumn(
-            'send_survey_date', array(
-                'header' => Mage::helper('blog')->__('Sent Survey date'),
-                'index' => 'send_survey_date',
-                'width' => '120px',
-                'type' => 'datetime',
-                'gmtoffset' => true,
-                'default' => ' -- '
-            )
-        );
-
-        $this->addColumn('status', array(
-            'header' => Mage::helper('survey')->__('Status'),
-            'align' => 'left',
-            'width' => '80px',
-            'index' => 'status',
-            'type' => 'options',
-            'options' => Mage::getSingleton('survey/status')->getOptionArray(),
         ));
 
         $this->addColumn('action', array(
@@ -72,7 +39,7 @@ class Kevin_Survey_Block_Adminhtml_Survey_Grid extends Mage_Adminhtml_Block_Widg
             'getter' => 'getId',
             'actions' => array(
                 array(
-                    'caption' => Mage::helper('survey')->__('Edit'),
+                    'caption' => Mage::helper('survey')->__('View'),
                     'url' => array('base' => '*/*/edit'),
                     'field' => 'id'
                 )

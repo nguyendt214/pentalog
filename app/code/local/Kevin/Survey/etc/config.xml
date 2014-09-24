@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Kevin_Survey>
-            <version>0.2.0</version>
+            <version>0.1.0</version>
         </Kevin_Survey>
     </modules>
     <frontend>
@@ -117,7 +117,7 @@
         <resources>
             <survey_setup>
                 <setup>
-                    <module>Kevin_survey</module>
+                    <module>Kevin_Survey</module>
                 </setup>
                 <connection>
                     <use>core_setup</use>

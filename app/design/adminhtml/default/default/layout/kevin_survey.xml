@@ -5,4 +5,9 @@
             <block type="survey/adminhtml_survey" name="survey" />
         </reference>
     </survey_adminhtml_survey_index>
+    <survey_adminhtml_list_index>
+        <reference name="content">
+            <block type="survey/adminhtml_list" name="list" />
+        </reference>
+    </survey_adminhtml_list_index>
 </layout>
