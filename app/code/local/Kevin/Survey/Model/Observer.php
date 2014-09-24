@@ -11,4 +11,11 @@ class Kevin_Survey_Model_Observer{
 
         }
     }
+    /*
+     * Check every day to send survey to customer
+     */
+    public function checkSendSurvey(){
+        Mage::helper('survey')->checkSendSurvey();
+    }
+
 }

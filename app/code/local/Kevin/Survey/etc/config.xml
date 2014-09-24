@@ -181,4 +181,14 @@
             </survey>
         </kevin_survey>
     </default>
+    <crontab>
+        <jobs>
+            <kevin_survey>
+                <schedule><cron_expr>0 1 * * *</cron_expr></schedule>
+                <run>
+                    <model>survey/observer::checkSendSurvey</model>
+                </run>
+            </kevin_survey>
+        </jobs>
+    </crontab>
 </config>
