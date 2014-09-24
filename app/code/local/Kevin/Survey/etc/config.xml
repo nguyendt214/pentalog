@@ -15,6 +15,17 @@
                 </args>
             </survey>
         </routers>
+        <events>
+            <checkout_onepage_controller_success_action>
+                <observers>
+                    <kevin_survey>
+                        <type>model</type>
+                        <class>survey/observer</class>
+                        <method>createSurveySchedule</method>
+                    </kevin_survey>
+                </observers>
+            </checkout_onepage_controller_success_action>
+        </events>
     </frontend>
     <admin>
         <routers>
