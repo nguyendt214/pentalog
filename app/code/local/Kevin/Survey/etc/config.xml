@@ -26,6 +26,13 @@
                 </observers>
             </checkout_onepage_controller_success_action>
         </events>
+        <layout>
+            <updates>
+                <blog>
+                    <file>kevin_survey.xml</file>
+                </blog>
+            </updates>
+        </layout>
     </frontend>
     <admin>
         <routers>
@@ -158,12 +165,12 @@
         <template>
             <email>
                 <kevin_survey_survey_email_template translate="label" module="blog">
-                    <label>Survey Email</label>
+                    <label>Survey Email To Customer</label>
                     <file>kevin/survey/email.customer.html</file>
                     <type>html</type>
                 </kevin_survey_survey_email_template>
                 <kevin_survey_survey_email_template_admin translate="label" module="blog">
-                    <label>Survey Email</label>
+                    <label>Survey Email To Admin</label>
                     <file>kevin/survey/email.administrator.html</file>
                     <type>html</type>
                 </kevin_survey_survey_email_template_admin>

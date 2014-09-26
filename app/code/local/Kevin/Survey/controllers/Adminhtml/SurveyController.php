@@ -32,8 +32,8 @@ class Kevin_Survey_Adminhtml_SurveyController extends Mage_Adminhtml_Controller_
         try {
             $configs = Mage::helper('survey')->getAllConfigs();
             $survey = Mage::getModel('survey/survey')->load($this->getRequest()->getParam('id'));
-            $orderId = Mage::getModel('sales/order')->load($survey->getId());
-            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('survey')->__('Email has sent to: ') . $configs->getTestEmail());
+            Mage::helper('survey')->sendSurvey($survey, $configs);
+            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('survey')->__('Email has been sent to: ') . $configs->getTestEmail());
         } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }

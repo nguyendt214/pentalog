@@ -16,9 +16,6 @@ class Kevin_Survey_Adminhtml_ListController extends Mage_Adminhtml_Controller_Ac
 
     public function indexAction()
     {
-//        $order = Mage::getModel('sales/order')->load(189);
-//        Mage::helper('survey')->createSurveySchedule($order);
-        Mage::helper('survey')->checkSendSurvey();
         $this->_initAction()
             ->renderLayout();
     }

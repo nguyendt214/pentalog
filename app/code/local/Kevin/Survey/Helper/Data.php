@@ -68,20 +68,6 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function checkSendSurvey()
     {
-        //Test send email function
-
-        $to = "root@localhost.com";
-        $subject = "Hi!";
-        $body = "test";
-
-        $headers = "From: root@localhost.com";
-
-        if (mail($to, $subject, $body, $headers)) {
-            echo("Message successfully sent!");
-        } else {
-            echo("Message delivery failed...");
-        }
-        //end
 
         $today = Mage::getModel('core/date')->date('Y-m-d');
         $surveys = Mage::getModel('survey/survey')
@@ -96,6 +82,34 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
                     die();
                 }
             }
+        }
+    }
+
+    /*
+     * Send survey email
+     */
+    public function sendSurvey($survey, $configs = null){
+        if($configs === null)
+            $configs = $this->_configs;
+        try{
+            $order = Mage::getModel('sales/order')->load($survey->getOrderId());
+            $templateId = $configs->getEmailTemplate();
+            $sender = $configs->getSenderEmailIdentity();
+            $sendTo = array(
+                'name' => '',
+                'email' => $configs->getTestEmail(),
+            );
+
+            $params = array(
+                'order' => $order
+            );
+
+            $storeId = Mage::app()->getStore()->getStoreId();
+
+            Mage::helper('all/email')->sendEmail($templateId,$sender, $sendTo, null, null, $params, $storeId);
+
+        }catch (Exception $e){
+            throw new Exception($e->getMessage());
         }
     }
 }

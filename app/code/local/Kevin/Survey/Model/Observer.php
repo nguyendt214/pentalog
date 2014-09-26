@@ -5,10 +5,11 @@
 class Kevin_Survey_Model_Observer{
 
     public function createSurveySchedule(Varien_Event_Observer $observer){
-//        Mage::log($observer->getData(), null, 'kevin.log');
         $orderIds = $observer->getOrderIds();
         if(sizeof($orderIds)){
-
+            foreach($orderIds as $orderId){
+                Mage::helper('survey')->createSurveySchedule(Mage::getModel('sales/order')->load($orderId));
+            }
         }
     }
     /*
