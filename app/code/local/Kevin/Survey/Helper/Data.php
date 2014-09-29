@@ -100,6 +100,9 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
             $storeId = Mage::app()->getStore()->getStoreId();
 
             Mage::helper('all/email')->sendEmail($templateId, $sender, $sendTo, null, null, $params, $storeId);
+            //Change survey schedule status
+            $survey->setStatus(1);
+            $survey->save();
 
         } catch (Exception $e) {
             Mage::log("Send survey to customer error: " . $e->getMessage() . " Survey ID: " . $survey->getId());
