@@ -164,12 +164,12 @@
         </helpers>
         <template>
             <email>
-                <kevin_survey_survey_email_template translate="label" module="blog">
+                <kevin_survey_survey_email_template translate="label" module="survey">
                     <label>Survey Email To Customer</label>
                     <file>kevin/survey/email.customer.html</file>
                     <type>html</type>
                 </kevin_survey_survey_email_template>
-                <kevin_survey_survey_email_template_admin translate="label" module="blog">
+                <kevin_survey_survey_email_template_admin translate="label" module="survey">
                     <label>Survey Email To Admin</label>
                     <file>kevin/survey/email.administrator.html</file>
                     <type>html</type>

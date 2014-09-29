@@ -37,7 +37,7 @@ class Kevin_Survey_Block_Adminhtml_Survey_Grid extends Mage_Adminhtml_Block_Widg
 
         $this->addColumn(
             'purchased_date', array(
-                'header' => Mage::helper('blog')->__('Purchased Date'),
+                'header' => Mage::helper('survey')->__('Purchased Date'),
                 'index' => 'purchased_date',
                 'type' => 'datetime',
                 'width' => '150px',
@@ -48,7 +48,7 @@ class Kevin_Survey_Block_Adminhtml_Survey_Grid extends Mage_Adminhtml_Block_Widg
 
         $this->addColumn(
             'send_survey_date', array(
-                'header' => Mage::helper('blog')->__('Sent Survey date'),
+                'header' => Mage::helper('survey')->__('Sent Survey date'),
                 'index' => 'send_survey_date',
                 'width' => '200px',
                 'type' => 'datetime',

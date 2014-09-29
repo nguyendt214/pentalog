@@ -16,7 +16,7 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
         $store = Mage::app()->getStore()->getStoreId();
         if ($this->_configs === null) {
             $this->_configs = array(
-                //Blog Listing config
+                //Survey config
                 'days' => ((int)$this->getConfig('kevin_survey/survey/days')) ? (int)$this->getConfig('kevin_survey/survey/days') : 21,
                 'test_email' => ($this->getConfig('kevin_survey/survey/test_email')) ? $this->getConfig('kevin_survey/survey/test_email') : 'nguyendt214@gmail.com',
                 'sender_email_identity' => ($this->getConfig('kevin_survey/survey/sender_email_identity')) ? $this->getConfig('kevin_survey/survey/sender_email_identity') : 'general',
@@ -54,8 +54,7 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
             'order_increment' => $order->getIncrementId(),
             'status' => 2,
             'purchased_date' => $today,
-            //'send_survey_date' => date('Y-m-d', strtotime(date("Y-m-d", strtotime($today)) . " +".$config->getDays()." day")),
-            'send_survey_date' => $today,
+            'send_survey_date' => date('Y-m-d', strtotime(date("Y-m-d", strtotime($today)) . " +" . $config->getDays() . " day")),
         );
 
         $survey = Mage::getModel('survey/survey');
@@ -68,7 +67,6 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function checkSendSurvey()
     {
-
         $today = Mage::getModel('core/date')->date('Y-m-d');
         $surveys = Mage::getModel('survey/survey')
             ->getCollection()
@@ -77,21 +75,45 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
             foreach ($surveys as $survey) {
                 //If send_survey_date === today: send survey and update status = 1
                 if (strtotime($today) == strtotime($survey->getSendSurveyDate())) {
-                    print "<pre>";
-                    print_r($survey->getData());
-                    die();
+                    $this->sendSurveyEmail($survey);
                 }
             }
+        }
+    }
+
+    public function sendSurveyEmail($survey)
+    {
+        $configs = $this->getAllConfigs();
+        try {
+            $order = Mage::getModel('sales/order')->load($survey->getOrderId());
+            $templateId = $configs->getEmailTemplate();
+            $sender = $configs->getSenderEmailIdentity();
+            $sendTo = array(
+                'name' => $order->getCustomerFirstname() . ' ' . $order->getCustomerLastname(),
+                'email' => $order->getCustomerEmail(),
+            );
+            $order->setSurveyLink(Mage::getUrl('survey/index', array('id' => $order->getId())));
+            $params = array(
+                'order' => $order
+            );
+
+            $storeId = Mage::app()->getStore()->getStoreId();
+
+            Mage::helper('all/email')->sendEmail($templateId, $sender, $sendTo, null, null, $params, $storeId);
+
+        } catch (Exception $e) {
+            Mage::log("Send survey to customer error: " . $e->getMessage() . " Survey ID: " . $survey->getId());
         }
     }
 
     /*
      * Send survey email
      */
-    public function sendSurvey($survey, $configs = null){
-        if($configs === null)
-            $configs = $this->_configs;
-        try{
+    public function sendSurvey($survey, $configs = null)
+    {
+        if ($configs === null)
+            $configs = $this->getAllConfigs();
+        try {
             $order = Mage::getModel('sales/order')->load($survey->getOrderId());
             $templateId = $configs->getEmailTemplate();
             $sender = $configs->getSenderEmailIdentity();
@@ -99,17 +121,115 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
                 'name' => '',
                 'email' => $configs->getTestEmail(),
             );
-            $order->setSurveyLink(Mage::getUrl('survey/index', array('id'=>$order->getId())));
+            $order->setSurveyLink(Mage::getUrl('survey/index', array('id' => $order->getId())));
             $params = array(
                 'order' => $order
             );
 
             $storeId = Mage::app()->getStore()->getStoreId();
 
-            Mage::helper('all/email')->sendEmail($templateId,$sender, $sendTo, null, null, $params, $storeId);
+            Mage::helper('all/email')->sendEmail($templateId, $sender, $sendTo, null, null, $params, $storeId);
 
-        }catch (Exception $e){
+        } catch (Exception $e) {
             throw new Exception($e->getMessage());
+        }
+    }
+
+    /*
+     * Send email to admin when customer create new survey
+     */
+    public function sendEmailAfterCustomerCreateSurvey($surveyList)
+    {
+        try {
+            $configs = $this->getAllConfigs();
+            $order = Mage::getModel('sales/order')->load($surveyList->getOrderId());
+            $templateId = $configs->getEmailTemplateAdmin();
+            $sender = $configs->getSenderEmailIdentity();
+            $sendTo = array(
+                'name' => 'Administrator',
+                'email' => $configs->getTestEmail(),
+            );
+            $surveyList->setGoodCondition(($surveyList->getGoodCondition()) ? 'Yes' : 'No');
+            $surveyList->setLikeInfo(($surveyList->getLikeInfo()) ? 'Yes' : 'No');
+            $surveyList->setUseTestimonial(($surveyList->getUseTestimonial()) ? 'Yes' : 'No');
+            $params = array(
+                'survey' => $surveyList,
+                'order' => $order,
+            );
+            $storeId = Mage::app()->getStore()->getStoreId();
+            Mage::helper('all/email')->sendEmail($templateId, $sender, $sendTo, null, null, $params, $storeId);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function saveProductReview($survey)
+    {
+        try {
+            $order = Mage::getModel('sales/order')->load($survey->getOrderId());
+            $data = array(
+                'ratings' => array(
+                    '1' => 5,
+                    '2' => 10,
+                    '3' => 15
+                ),
+                'detail' => $survey->getComment(),
+                'title' => 'Customer survey',
+                'nickname' => $order->getCustomerFirstname() . ' ' . $order->getCustomerLastname()
+            );
+
+            $ratings = $data['ratings'];
+            $items = $order->getAllVisibleItems();
+            foreach ($items as $item) {
+                $product = Mage::getModel('catalog/product')->load($item->getProductId());
+                $review = Mage::getModel('review/review')->setData($data);
+                $validate = $review->validate();
+                if ($validate === true) {
+                    $review->setEntityId($review->getEntityIdByCode(Mage_Review_Model_Review::ENTITY_PRODUCT_CODE))
+                        ->setEntityPkValue($product->getId())
+                        ->setStatusId(Mage_Review_Model_Review::STATUS_PENDING)
+                        ->setCustomerId($order->getCustomerId())
+                        ->setStoreId(Mage::app()->getStore()->getId())
+                        ->setStores(array(Mage::app()->getStore()->getId()))
+                        ->save();
+
+                    foreach ($ratings as $ratingId => $optionId) {
+                        Mage::getModel('rating/rating')
+                            ->setRatingId($ratingId)
+                            ->setReviewId($review->getId())
+                            ->setCustomerId($order->getCustomerId())
+                            ->addOptionVote($optionId, $product->getId());
+                    }
+
+                    $review->aggregate();
+                }
+            }
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function autoLoggedCustomer($order)
+    {
+        $customer = Mage::helper('customer')->getCustomer();
+        if (isset($customer) and $customer->getId() > 0) {
+            $customerIdInOrder = $order->getCustomerId();
+            if($customerIdInOrder == $customer->getId())
+                return true;
+            return false;
+        } else {
+            $customer = Mage::getModel('customer/customer')
+                ->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
+                ->loadByEmail($order->getCustomerEmail());
+
+            if ($customer->getId()) {
+                $_session = Mage::getSingleton('customer/session');
+                $_session->setCustomerAsLoggedIn($customer);
+                $_session->renewSession();
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config>
     <sections>
-        <kevin_survey translate="label" module="blog">                    
+        <kevin_survey translate="label" module="survey">
             <label>Survey</label>
             <class>separator-top</class>
             <tab>customer</tab>
@@ -28,7 +28,7 @@
                             <comment>Default: 21 days</comment>
                         </days>
                         <test_email translate="label">
-                            <label>Send Test Emails To</label>
+                            <label>Administrator's Email</label>
                             <frontend_type>text</frontend_type>
                             <validate>validate-email required-entry</validate>
                             <sort_order>2</sort_order>

@@ -1,0 +1,56 @@
+<?php $survey = $this->getSurvey(); ?>
+<style>
+    .border-bottom{
+        border-bottom: 1px solid #808080;
+    }
+</style>
+<div class="entry-edit">
+    <fieldset>
+        <table cellspacing="15" cellpadding="2" width="100%">
+            <tr class="old">
+                <td style="width: 55%;" class="border-bottom"><strong><?php echo Mage::helper('survey')->__("Order#"); ?></strong></td>
+                <td class="border-bottom"><?php echo $survey->getOrderIncrement(); ?></td>
+            </tr>
+            <tr class="even">
+                <td class="border-bottom">
+                    <strong><?php echo Mage::helper('survey')->__('1. Did you receive your recent order on time and in good condition?'); ?></strong>
+                </td>
+                <td class="border-bottom"><?php echo ($survey->getGoodCondition()) ? 'Yes' : 'No'; ?></td>
+            </tr>
+            <?php if (!$survey->getGoodCondition()): ?>
+                <tr>
+                    <td class="border-bottom"><?php echo __("Problem / Contact info:");?></td>
+                    <td class="border-bottom"><?php echo nl2br($survey->getGoodConditionContent()); ?></td>
+                </tr>
+            <?php endif; ?>
+            <tr class="even">
+                <td class="border-bottom">
+                    <strong><?php echo Mage::helper('survey')->__('2. Where did you find out about Post-Up Stand?'); ?></strong>
+                </td>
+                <td class="border-bottom"><?php echo $survey->getFindOut(); ?></td>
+            </tr>
+            <tr>
+                <td class="border-bottom"><?php echo __("Please specify:");?></td>
+                <td class="border-bottom"><?php echo nl2br($survey->getFindOutOther()); ?></td>
+            </tr>
+            <tr class="even">
+                <td class="border-bottom">
+                    <strong><?php echo Mage::helper('survey')->__('3. Would you like information on participating in our Referral Program to earn cash or discounts?'); ?></strong>
+                </td>
+                <td class="border-bottom"><?php echo ($survey->getLikeInfo()) ? 'Yes' : 'No'; ?></td>
+            </tr>
+            <tr class="old">
+                <td class="border-bottom">
+                    <strong><?php echo Mage::helper('survey')->__("4. Please provide any additional questions or comments below."); ?></strong>
+                </td>
+                <td class="border-bottom"><?php echo nl2br($survey->getComment()); ?></td>
+            </tr>
+            <tr class="even">
+                <td class="border-bottom">
+                    <strong><?php echo Mage::helper('survey')->__('5. Can we use your response as a testimonial?'); ?></strong>
+                </td>
+                <td class="border-bottom"><?php echo ($survey->getUseTestimonial()) ? 'Yes' : 'No'; ?></td>
+            </tr>
+        </table>
+    </fieldset>
+</div>

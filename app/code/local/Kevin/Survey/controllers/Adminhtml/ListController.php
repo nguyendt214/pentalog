@@ -27,6 +27,34 @@ class Kevin_Survey_Adminhtml_ListController extends Mage_Adminhtml_Controller_Ac
         return $this;
     }
 
+    public function viewAction()
+    {
+        $id = $this->getRequest()->getParam('id');
+        $model = Mage::getModel('survey/list')->load($id);
+
+        if ($model->getId() || $id == 0) {
+            $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
+            if (!empty($data)) {
+                $model->setData($data);
+            }
+            $this->setTitle(Mage::helper('krewrite')->__("Survey detail"));
+
+            Mage::register('survey_data', $model);
+
+            $this->loadLayout();
+            $this->_setActiveMenu('customer/survey');
+
+            $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
+
+            $this->_addContent($this->getLayout()->createBlock('survey/adminhtml_list_edit'));
+
+            $this->renderLayout();
+        } else {
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('survey')->__('Item does not exist'));
+            $this->_redirect('*/*/');
+        }
+    }
+
 
     protected function _isAllowed()
     {

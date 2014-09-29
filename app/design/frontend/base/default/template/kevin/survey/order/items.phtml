@@ -25,10 +25,10 @@
                 <?php echo $_item->getSku(); ?>
             </td>
             <td align="center" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
-                <?php echo $_item->getQtyOrdered(); ?>
+                <?php echo (int)$_item->getQtyOrdered(); ?>
             </td>
             <td align="right" valign="top" style="font-size:11px; padding:3px 9px; border-bottom:1px dotted #CCCCCC;">
-                <?php echo $_item->getBaseRowTotalInclTax(); ?>
+                <?php echo Mage::helper('core')->currency($_item->getBaseRowTotalInclTax(), true, false); ?>
             </td>
             </tbody>
         <?php endforeach; ?>

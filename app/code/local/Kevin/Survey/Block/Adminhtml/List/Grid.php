@@ -32,6 +32,17 @@ class Kevin_Survey_Block_Adminhtml_List_Grid extends Mage_Adminhtml_Block_Widget
             'index' => 'order_increment',
         ));
 
+        $this->addColumn(
+            'created_date', array(
+                'header' => Mage::helper('survey')->__('Created Date'),
+                'index' => 'created_date',
+                'type' => 'datetime',
+                'width' => '150px',
+                'gmtoffset' => true,
+                'default' => ' -- '
+            )
+        );
+
         $this->addColumn('action', array(
             'header' => Mage::helper('survey')->__('Action'),
             'width' => '100',
@@ -40,7 +51,7 @@ class Kevin_Survey_Block_Adminhtml_List_Grid extends Mage_Adminhtml_Block_Widget
             'actions' => array(
                 array(
                     'caption' => Mage::helper('survey')->__('View'),
-                    'url' => array('base' => '*/*/edit'),
+                    'url' => array('base' => '*/*/view'),
                     'field' => 'id'
                 )
             ),
@@ -57,7 +68,7 @@ class Kevin_Survey_Block_Adminhtml_List_Grid extends Mage_Adminhtml_Block_Widget
     }
 
     public function getRowUrl($row) {
-        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+        return $this->getUrl('*/*/view', array('id' => $row->getId()));
     }
 
 }
