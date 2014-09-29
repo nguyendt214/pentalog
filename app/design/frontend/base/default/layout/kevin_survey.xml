@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
     <survey_index_index>
-
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="survey/survey" name="survey_form" template="kevin/survey/form.phtml"/>
+        </reference>
     </survey_index_index>
 </layout>

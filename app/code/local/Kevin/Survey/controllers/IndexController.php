@@ -9,4 +9,13 @@ class Kevin_Survey_IndexController extends Mage_Core_Controller_Front_Action{
         $this->_title(__("Survey Page"));
         $this->renderLayout();
     }
+
+    public function surveyPostAction(){
+        $post = $this->getRequest()->getPost();
+        try{
+
+        }catch (Exception $e){
+            $this->_redirect("*/*/");
+        }
+    }
 }

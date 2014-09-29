@@ -28,9 +28,9 @@
         </events>
         <layout>
             <updates>
-                <blog>
+                <survey>
                     <file>kevin_survey.xml</file>
-                </blog>
+                </survey>
             </updates>
         </layout>
     </frontend>

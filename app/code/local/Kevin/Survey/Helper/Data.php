@@ -99,7 +99,7 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
                 'name' => '',
                 'email' => $configs->getTestEmail(),
             );
-
+            $order->setSurveyLink(Mage::getUrl('survey/index', array('id'=>$order->getId())));
             $params = array(
                 'order' => $order
             );

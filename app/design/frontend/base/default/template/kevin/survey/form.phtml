@@ -1,0 +1,87 @@
+<?php $order = $this->getSurveyInfo();?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="page-title">
+    <h1><?php echo Mage::helper('survey')->__('Post up stand survey') ?></h1>
+</div>
+<form action="<?php echo $this->getFormAction(); ?>" id="surveyForm" method="post">
+    <input type="hidden" name="order_id" value="<?php echo $order->getId();?>" />
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('survey_form')->toHtml() ; ?>
+<!--    <div class="fieldset">-->
+<!--        <ul class="form-list">-->
+<!--            <li class="fields">-->
+<!--                <div class="field">-->
+<!--                    <label for="name" class="required"><em>*</em>1. Did you receive your recent order on time and in good condition?</label>-->
+<!--                    <div class="input-box">-->
+<!--                        <input type="radio" name="good_condition" value="1" id="good_condition_yes" class=""/> <label for="good_condition_yes">Yes</label>-->
+<!--                        <br/>-->
+<!--                        <input type="radio" name="good_condition" value="0" id="good_condition_no" class="validate-one-required"/> <label for="good_condition_no">No - If no, someone will be contacting you to rectify the situation.</label>-->
+<!--                    </div>-->
+<!--                    <div class="input-box">-->
+<!--                        <label>Problem / Contact info</label><br/>-->
+<!--                        <textarea name="good_condition_content" id="good_condition_content" title="" class="input-text" cols="5" rows="3"></textarea>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--            <li class="fields">-->
+<!--                <div class="field">-->
+<!--                    <label for="name" class="required"><em>*</em>2. Where did you find out about Post-Up Stand?</label>-->
+<!--                    <div class="input-box">-->
+<!--                        <input type="checkbox" name="find_out[]" id="find_out_catalog_mailing" value="Catalog Mailing"/> <label for="find_out_catalog_mailing">Catalog Mailing</label>-->
+<!--                        <br/>-->
+<!--                        <input type="checkbox" name="find_out[]" id="find_out_web_search" value="Web Search"/> <label for="find_out_web_search">Web Search</label>-->
+<!--                        <br/>-->
+<!--                        <input type="checkbox" name="find_out[]" id="find_out_asi" value="ASI"/> <label for="find_out_asi">ASI</label>-->
+<!--                        <br/>-->
+<!--                        <input type="checkbox" name="find_out[]" id="find_out_skymail" value="Skymail"/> <label for="find_out_skymail">Skymail</label>-->
+<!--                        <br/>-->
+<!--                        <input type="checkbox" name="find_out[]" id="find_out_referral" value="Referral - please specify who referred you"/> <label for="find_out_referral">Referral - please specify who referred you</label>-->
+<!--                        <br/>-->
+<!--                        <input type="checkbox" name="find_out[]" class="validate-one-required" id="find_out_other_specify" value="Orther - Please specify source"/> <label for="find_out_other_specify">Other - Please specify source</label>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="input-box">-->
+<!--                        <label>Please specify</label><br/>-->
+<!--                        <textarea name="find_out_other" id="find_out_other" title="" class="input-text" cols="5" rows="3"></textarea>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--            <li class="fields">-->
+<!--                <div class="field">-->
+<!--                    <label for="name" class="required"><em>*</em>3. Would you like information on participating in our Referral Program to earn cash or discounts?</label>-->
+<!--                    <div class="input-box">-->
+<!--                        <input type="radio" name="like_info" value="1" id="like_info_yes" /> <label for="like_info_yes">Yes</label>-->
+<!--                        <br/>-->
+<!--                        <input type="radio" name="like_info" value="0" id="like_info_no" class="validate-one-required"/> <label for="like_info_no">No</label>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--            <li class="fields">-->
+<!--                <div class="field">-->
+<!--                    <label for="name" class="required"><em>*</em>4. Please provide any additional questions or comments below.</label>-->
+<!--                    <div class="input-box">-->
+<!--                        <textarea name="comment" id="comment" title="" class="input-text required-entry" cols="5" rows="3"></textarea>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--            <li class="fields">-->
+<!--                <div class="field">-->
+<!--                    <label for="name" class="required"><em>*</em>5. Can we use your response as a testimonial?</label>-->
+<!--                    <div class="input-box">-->
+<!--                        <input type="radio" name="use_testimonial" value="1" id="use_testimonial_yes" class=""/> <label for="use_testimonial_yes">Yes</label>-->
+<!--                        <br/>-->
+<!--                        <input type="radio" name="use_testimonial" value="0" id="use_testimonial_no" class="validate-one-required"/> <label for="use_testimonial_no">No</label>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--    <div class="buttons-set">-->
+<!--        <p class="required">* Required Fields</p>-->
+<!--        <button type="submit" title="DONE" class="button"><span><span>DONE</span></span></button>-->
+<!--    </div>-->
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    var surveyForm = new VarienForm('surveyForm', true);
+    //]]>
+</script>

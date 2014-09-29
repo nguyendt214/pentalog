@@ -49,16 +49,16 @@ $table = $installer->getConnection()
     ->addColumn('good_condition', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
         'default' => 0
     ), 'Condition')
-    ->addColumn('good_condition_content', Varien_Db_Ddl_Table::TYPE_VARCHAR, 300, array(
+    ->addColumn('good_condition_content', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
     ), 'Condition content')
-    ->addColumn('find_out', Varien_Db_Ddl_Table::TYPE_VARCHAR, 300, array(
+    ->addColumn('find_out', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
     ), 'find_out')
-    ->addColumn('find_out_other', Varien_Db_Ddl_Table::TYPE_VARCHAR, 300, array(
+    ->addColumn('find_out_other', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
     ), 'find_out_other')
     ->addColumn('like_info', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
         'default' => 0
     ), 'like_info')
-    ->addColumn('comment', Varien_Db_Ddl_Table::TYPE_VARCHAR, 300, array(
+    ->addColumn('comment', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
     ), 'comment')
     ->addColumn('use_testimonial', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
         'default' => 0
