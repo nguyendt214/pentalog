@@ -16,7 +16,7 @@ class Kevin_Survey_Model_Observer{
      * Check every day to send survey to customer
      */
     public function checkSendSurvey(){
-        Mage::log("Send survey date: ".Mage::getModel('core/date')->date('Y-m-d'));
+        Mage::log("Send survey date: ".Mage::getModel('core/date')->date('Y-m-d'), null, 'survey_schedule.log');
         Mage::helper('survey')->checkSendSurvey();
     }
 

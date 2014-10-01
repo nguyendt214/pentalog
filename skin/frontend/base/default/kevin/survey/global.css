@@ -1,0 +1,12 @@
+.survey-form  .field, .survey-form  .form-list .input-box{
+    width:100%;
+}
+.survey-form  input{
+    float:left;
+}
+.survey-form  .form-list .input-box label{
+    padding-left:5px;
+}
+.survey-form  .buttons-set p.required{
+    text-align:right;
+}

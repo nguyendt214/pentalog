@@ -168,6 +168,8 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function saveProductReview($survey)
     {
+        if($survey->getUseTestimonial() == 0)
+            return;
         try {
             $order = Mage::getModel('sales/order')->load($survey->getOrderId());
             $data = array(

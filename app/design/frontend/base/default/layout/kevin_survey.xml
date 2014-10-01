@@ -4,6 +4,9 @@
         <reference name="root">
             <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
         </reference>
+        <reference name="head">
+            <action method="addCss"><stylesheet>kevin/survey/css/global.css</stylesheet></action>
+        </reference>
         <reference name="content">
             <block type="survey/survey" name="survey_form" template="kevin/survey/form.phtml"/>
         </reference>
