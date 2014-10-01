@@ -34,7 +34,9 @@ class Kevin_Survey_IndexController extends Mage_Core_Controller_Front_Action
             $surveyList->addData($post);
             $surveyList->save();
             //integrate survey with product review
-            Mage::helper('survey')->saveProductReview($surveyList);
+            if($post['use_testimonial'] == 1){
+                Mage::helper('survey')->saveProductReview($surveyList);
+            }
             //Send email notify to administrator
             Mage::helper('survey')->sendEmailAfterCustomerCreateSurvey($surveyList);
         } catch (Exception $e) {

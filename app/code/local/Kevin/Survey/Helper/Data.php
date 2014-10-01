@@ -191,7 +191,7 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
                     $review->setEntityId($review->getEntityIdByCode(Mage_Review_Model_Review::ENTITY_PRODUCT_CODE))
                         ->setEntityPkValue($product->getId())
                         ->setStatusId(Mage_Review_Model_Review::STATUS_PENDING)
-                        ->setCustomerId($order->getCustomerId())
+                        ->setCustomerId(Mage::getSingleton('customer/session')->getCustomerId())
                         ->setStoreId(Mage::app()->getStore()->getId())
                         ->setStores(array(Mage::app()->getStore()->getId()))
                         ->save();
@@ -200,7 +200,7 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
                         Mage::getModel('rating/rating')
                             ->setRatingId($ratingId)
                             ->setReviewId($review->getId())
-                            ->setCustomerId($order->getCustomerId())
+                            ->setCustomerId(Mage::getSingleton('customer/session')->getCustomerId())
                             ->addOptionVote($optionId, $product->getId());
                     }
 
@@ -214,6 +214,7 @@ class Kevin_Survey_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function autoLoggedCustomer($order)
     {
+        return;
         $customer = Mage::helper('customer')->getCustomer();
         if (isset($customer) and $customer->getId() > 0) {
             $customerIdInOrder = $order->getCustomerId();
